@@ -1,0 +1,11 @@
+img{
+  margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+}
+
+.welcome{
+  display: block;
+  width: auto;
+  justify-content: center;
+}
