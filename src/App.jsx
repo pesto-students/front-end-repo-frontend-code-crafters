@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <div className='homepage'>
-          <h1>Welcome to Harvestly, {user}!</h1>
+          <h1 className="text-6xl font-bold mt-5">Welcome to Harvestly, {user}!</h1>
           <img src={harvestlyLogo} className="logo" alt="Harvestly logo"/>
       </div>
       
