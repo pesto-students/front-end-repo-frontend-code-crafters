@@ -1,3 +1,4 @@
+import React from "react"
 import harvestlyLogo from './assets/logo-white.svg'
 import './App.css'
 import { useEffect, useState } from 'react'
