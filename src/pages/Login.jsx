@@ -87,9 +87,9 @@ const Login = () => {
           <div className="flex justify-center mb-2">
             <span className="block text-sm font-medium leading-6 text-gray-900">Or</span>
           </div>
-          <div class="flex items-center justify-center">
-            <button class="px-3 py-1.5 border flex gap-2 border-slate-200 rounded-lg text-gray-900 text-sm font-semibold leading-6 hover:border-slate-400 hover:shadow transition duration-150" onClick={googleAuth}>
-              <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
+          <div className="flex items-center justify-center">
+            <button className="px-3 py-1.5 border flex gap-2 border-slate-200 rounded-lg text-gray-900 text-sm font-semibold leading-6 hover:border-slate-400 hover:shadow transition duration-150" onClick={googleAuth}>
+              <img className="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo"/>
               <span>Login with Google</span>
             </button>
           </div>
