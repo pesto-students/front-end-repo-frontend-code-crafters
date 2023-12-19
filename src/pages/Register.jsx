@@ -80,7 +80,7 @@ const Register = () => {
                   id="name"
                   name="name"
                   type="text"
-                  // autoComplete="email"
+                  autoComplete="email"
                   placeholder="Name"
                   required
                   onChange={handleChange}

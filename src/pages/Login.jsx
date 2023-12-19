@@ -1,10 +1,44 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 const Login = () => {
+  const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
+
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
   };
+
+  const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
+
+  const handleLogin = async (e) => {
+		e.preventDefault();
+    console.log("login clicked");
+		try {
+			const url = `${VITE_API_URL}/user/login`;
+			const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+      const token = await res.json()
+			localStorage.setItem("token", token.data);
+			window.location = "/home";
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
 
   return (
     <>
@@ -24,7 +58,7 @@ const Login = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" method="POST" onSubmit={(e)=>handleLogin(e)}>
             <div>
               <label
                 htmlFor="email"
@@ -38,6 +72,7 @@ const Login = () => {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -67,6 +102,7 @@ const Login = () => {
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  onChange={handleChange}
                   required
                   className="block w-full rounded-md border-0 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -78,6 +114,7 @@ const Login = () => {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md mb-2 bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onSubmit={(e)=>handleLogin(e)} 
                 >
                   Login
                 </button>

@@ -3,11 +3,11 @@ import React from 'react';
 const Home = () => {
 	const handleLogout = () => {
 		localStorage.removeItem("token");
-		window.location.reload();
+		window.location = "/login";
 	};
 
 	return (
-		<div>
+		<div className="text-black">
 			<nav>
 				<h1>Home Page</h1>
 				<button onClick={handleLogout}>
