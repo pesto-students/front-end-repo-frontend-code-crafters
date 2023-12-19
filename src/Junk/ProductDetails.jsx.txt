@@ -1,0 +1,217 @@
+import "./ProductDetails.css";
+
+const ProductDetails = () => {
+  return (
+    <div className="products-details-description">
+      
+      <div className="product-detail">
+        <div className="product-details">
+          <div className="product-details-images">
+            <img
+              className="product-image-icon"
+              alt=""
+              src="/product-image@2x.png"
+            />
+            
+            
+          </div>
+          <div className="frame-parent">
+            <div className="frame-group">
+              <div className="product-name-parent">
+                <div className="product-name">
+                  <div className="chinese-cabbage">Chinese Cabbage</div>
+                  <div className="stock-status">
+                    <div className="sale">In Stock</div>
+                  </div>
+                </div>
+                <div className="rating-sku">
+                  <div className="rating4">
+                    <img
+                      className="rating-child17"
+                      alt=""
+                      src="/star-1@2x.png"
+                    />
+                    <img
+                      className="rating-child17"
+                      alt=""
+                      src="/star-1@2x.png"
+                    />
+                    <img
+                      className="rating-child17"
+                      alt=""
+                      src="/star-1@2x.png"
+                    />
+                    <img
+                      className="rating-child17"
+                      alt=""
+                      src="/star-1@2x.png"
+                    />
+                    <img
+                      className="rating-child17"
+                      alt=""
+                      src="/star-1@2x.png"
+                    />
+                    <div className="sale"> 4 Review</div>
+                  </div>
+                  <div className="div9">•</div>
+                  <div className="sku">
+                    <div className="div">SKU:</div>
+                    <div className="div10">2,51,594</div>
+                  </div>
+                </div>
+              </div>
+              <div className="price4">
+                <div className="parent">
+                  <div className="div11">$48.00</div>
+                  <div className="div12">$17.28</div>
+                </div>
+                <div className="off-wrapper">
+                  <div className="div">64% Off</div>
+                </div>
+              </div>
+              <div className="frame-child" />
+            </div>
+            <div className="frame-container">
+              <div className="frame-div">
+                <div className="product-name">
+                  <div className="sale">Brand:</div>
+                  <div className="rectangle-parent">
+                    <div className="group-child" />
+                    <img className="group-item" alt="" src="/group-20@2x.png" />
+                    <b className="farmary">farmary</b>
+                  </div>
+                </div>
+                <div className="share">
+                  <div className="sale">Share item:</div>
+                  <div className="share1">
+                    <img
+                      className="social-media-icon"
+                      alt=""
+                      src="/social-media@2x.png"
+                    />
+                    <img
+                      className="social-media-icon1"
+                      alt=""
+                      src="/social-media@2x.png"
+                    />
+                    <img
+                      className="social-media-icon1"
+                      alt=""
+                      src="/social-media@2x.png"
+                    />
+                    <img
+                      className="social-media-icon1"
+                      alt=""
+                      src="/social-media@2x.png"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="class-aptent-taciti">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
+            </div>
+            <div className="cta">
+              <div className="quantity">
+                <div className="minus">
+                  <div className="container" />
+                  <img className="minus-icon" alt="" src="/minus@2x.png" />
+                </div>
+                <div className="div13">5</div>
+                <div className="minus">
+                  <div className="container" />
+                  <img className="minus-icon" alt="" src="/plus-1@2x.png" />
+                </div>
+              </div>
+              <div className="button">
+                <div className="chinese-cabbage">Add to Cart</div>
+                <img
+                  className="rectangle-icon"
+                  alt=""
+                  src="/rectangle@2x.png"
+                />
+              </div>
+              <div className="button1">
+                <img className="heart-icon" alt="" src="/heart@2x.png" />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div className="products-description">
+          <div className="description">
+            <div className="sed-commodo-aliquam-container">
+              <p className="sed-commodo-aliquam">
+                Sed commodo aliquam dui ac porta. Fusce ipsum felis, imperdiet
+                at posuere ac, viverra at mauris. Maecenas tincidunt ligula a
+                sem vestibulum pharetra. Maecenas auctor tortor lacus, nec
+                laoreet nisi porttitor vel. Etiam tincidunt metus vel dui
+                interdum sollicitudin. Mauris sem ante, vestibulum nec orci
+                vitae, aliquam mollis lacus. Sed et condimentum arcu, id
+                molestie tellus. Nulla facilisi. Nam scelerisque vitae justo a
+                convallis. Morbi urna ipsum, placerat quis commodo quis, egestas
+                elementum leo. Donec convallis mollis enim. Aliquam id mi quam.
+                Phasellus nec fringilla elit.
+              </p>
+              <p className="sed-commodo-aliquam">&nbsp;</p>
+              <p className="sed-commodo-aliquam">{`Nulla mauris tellus, feugiat quis pharetra sed, gravida ac dui. Sed iaculis, metus faucibus elementum tincidunt, turpis mi viverra velit, pellentesque tristique neque mi eget nulla. Proin luctus elementum neque et pharetra. `}</p>
+            </div>
+            <div className="feature">
+              <div className="feature1">
+                <div className="check">
+                  <div className="check-child" />
+                  <img className="check-1-icon" alt="" src="/check-1@2x.png" />
+                </div>
+                <div className="g-of-fresh">
+                  100 g of fresh leaves provides.
+                </div>
+              </div>
+              <div className="feature1">
+                <div className="check">
+                  <div className="check-child" />
+                  <img className="check-1-icon" alt="" src="/check-1@2x.png" />
+                </div>
+                <div className="g-of-fresh">
+                  Aliquam ac est at augue volutpat elementum.
+                </div>
+              </div>
+              <div className="feature1">
+                <div className="check">
+                  <div className="check-child" />
+                  <img className="check-1-icon" alt="" src="/check-1@2x.png" />
+                </div>
+                <div className="g-of-fresh">
+                  Quisque nec enim eget sapien molestie.
+                </div>
+              </div>
+              <div className="feature1">
+                <div className="check">
+                  <div className="check-child" />
+                  <img className="check-1-icon" alt="" src="/check-1@2x.png" />
+                </div>
+                <div className="g-of-fresh">
+                  Proin convallis odio volutpat finibus posuere.
+                </div>
+              </div>
+            </div>
+            <div className="sed-commodo-aliquam-container">{`Cras et diam maximus, accumsan sapien et, sollicitudin velit. Nulla blandit eros non turpis lobortis iaculis at ut massa. `}</div>
+          </div>
+          <div className="navigation">
+            <div className="nav-link">
+              <div className="div">Descriptions</div>
+            </div>
+           
+          
+          </div>
+        
+          
+        </div>
+      </div>
+      
+     
+      
+    
+    
+    </div>
+  );
+};
+
+export default ProductDetails;

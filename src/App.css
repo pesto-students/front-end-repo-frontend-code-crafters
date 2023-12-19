@@ -8,3 +8,14 @@ img{
   justify-content: center;
   align-items: center;
 }
+@font-face {
+  font-family: 'Poppins';
+  src: url('./fonts/Poppins-Regular.ttf') format('truetype'); /* Adjust the path and file format accordingly */
+  /* Additional font properties if needed (e.g., font-weight, font-style) */
+
+}
+
+/* Use the font in your application */
+.Poppins {
+  font-family: 'Poppins', sans-serif; /* Apply your font family */
+}
