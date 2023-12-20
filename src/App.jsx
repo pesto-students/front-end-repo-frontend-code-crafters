@@ -1,29 +1,28 @@
-import React from "react"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React from "react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Link,
+} from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
-import './App.css'
-import "./index.css";
-const url =  import.meta.env.VITE_API_URL
+import NotFound from "./pages/NotFound";
+import Layout from "./components/Layout";
 
-function App() {
-
-  const user = localStorage.getItem("token");
-  console.log("token", user);
-
-  return (
-    <>
-    <BrowserRouter>
-      <Routes>
-        {user && <Route path="/home" exact element={<Home />} />}
-        <Route path="/" element={<Navigate replace to="/login" />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-      </Routes>
-    </BrowserRouter>
-    </>
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="*" element={<NotFound />} />
+    </Route>
   )
-}
+);
 
-export default App
+export default function App() {
+  return <RouterProvider router={router} />;
+}
