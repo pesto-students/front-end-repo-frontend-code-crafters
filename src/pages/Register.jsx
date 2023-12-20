@@ -22,12 +22,12 @@ const Register = () => {
       const url = `${VITE_API_URL}/user/register`;
       console.log(url);
       const { data: res } = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
       navigate("/login");
       console.log(res.message);
@@ -85,7 +85,7 @@ const Register = () => {
                   required
                   onChange={handleChange}
                   value={data.name}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  focus:ring-secondary  sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -104,7 +104,7 @@ const Register = () => {
                   required
                   onChange={handleChange}
                   value={data.email}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary"
                 />
               </div>
             </div>
@@ -127,7 +127,7 @@ const Register = () => {
                   required
                   onChange={handleChange}
                   value={data.password}
-                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ const Register = () => {
               <div className="mb-2s">
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md mb-2 bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md mb-2 bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus:ring-secondary  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                 >
                   Sign Up
                 </button>
@@ -150,7 +150,7 @@ const Register = () => {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="px-3 py-1.5 border flex gap-2 border-slate-200 rounded-lg text-gray-900 text-sm font-semibold leading-6 hover:border-slate-400 hover:shadow transition duration-150 "
+              className="px-3 py-1.5 border flex gap-2 border-slate-200 rounded-lg text-gray-900 text-sm font-semibold leading-6 hover:border-secondary hover:shadow transition duration-150"
               onClick={googleAuth}
             >
               <img
@@ -163,11 +163,11 @@ const Register = () => {
             </button>
           </div>
 
-          <p className="mt-5 text-center text-sm text-gray-500">
+          <p className="mt-5 text-center text-sm text-black">
             Already registered? {"  "}
             <a
               href="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-primary hover:text-secondary"
             >
               Login here!
             </a>

@@ -71,7 +71,7 @@ const Login = () => {
                   autoComplete="email"
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
+                  className="block w-full rounded-lg border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -84,14 +84,6 @@ const Login = () => {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-secondary hover:text-indigo-500"
-                  >
-                    Forgot password?
-                  </a>
-                </div> */}
               </div>
               <div className="mt-2">
                 <input
@@ -101,7 +93,7 @@ const Login = () => {
                   autoComplete="current-password"
                   onChange={handleChange}
                   required
-                  className="block w-full rounded-md border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
+                  className="block w-full rounded-lg border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -110,7 +102,7 @@ const Login = () => {
               <div className="mb-2s">
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md mb-2 px-3 py-1.5 text-sm font-semibold bg-primary hover:bg-secondary leading-6 text-white shadow-s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                  className="flex w-full justify-center rounded-lg mb-2 px-3 py-1.5 text-sm font-semibold bg-primary hover:bg-secondary leading-6 text-white shadow-s focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                   onSubmit={(e) => handleLogin(e)}
                 >
                   Login
@@ -138,7 +130,7 @@ const Login = () => {
             </button>
           </div>
 
-          <p className="mt-5 text-center text-sm text-gray-500">
+          <p className="mt-5 text-center text-sm text-black">
             No account? No problem. {"  "}
             <a
               href="/register"

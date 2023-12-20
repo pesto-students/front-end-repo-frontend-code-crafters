@@ -43,7 +43,7 @@ export default function Header() {
                     />
                 </Link> */}
         <Button
-          className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-md text-white font-semibold bg-primary hover:bg-secondary"
+          className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-lg text-white font-semibold bg-primary hover:bg-secondary"
           type="button"
         >
           Login / Register
