@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "../app/reducers/authSlice";
+
 const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const Login = () => {
+  const dispatch = useDispatch();
+  const { user, status, error } = useSelector((state) => state.auth);
   const [data, setData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
 
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
@@ -15,8 +24,8 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("login clicked");
     try {
+      dispatch(loginStart());
       const url = `${VITE_API_URL}/user/login`;
       const res = await fetch(url, {
         method: "POST",
@@ -28,6 +37,7 @@ const Login = () => {
       });
       const token = await res.json();
       localStorage.setItem("token", token.data);
+      dispatch(loginSuccess(token));
       window.location = "/home";
     } catch (error) {
       if (
@@ -35,7 +45,7 @@ const Login = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        setError(error.response.data.message);
+        dispatch(loginFailure(error.message));
       }
     }
   };

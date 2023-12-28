@@ -48,14 +48,6 @@ const Register = () => {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -136,7 +128,7 @@ const Register = () => {
               <div className="mb-2s">
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md mb-2 bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus:ring-secondary  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+                  className="flex w-full justify-center rounded-md mb-2 bg-primary hover:bg-secondary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus:ring-secondary  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                 >
                   Sign Up
                 </button>

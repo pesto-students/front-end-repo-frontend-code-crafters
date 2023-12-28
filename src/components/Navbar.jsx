@@ -9,13 +9,12 @@ export default function Header() {
     color: "#161616",
   };
 
-  // function fakeLogOut() {
-  //   localStorage.removeItem("loggedin");
-  // }
+  const token = localStorage.getItem("token")
+    ? localStorage.getItem("token")
+    : null;
 
   return (
     <header>
-      {/* <Link className="site-logo" to="/">#VanLife</Link> */}
       <nav className="flex justify-center items-center w-full h-150px bg-white shadow-md">
         <LogoText />
         {/* <NavLink 
@@ -42,12 +41,14 @@ export default function Header() {
                         className="login-icon"
                     />
                 </Link> */}
-        <Button
-          className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-lg text-white font-semibold bg-primary hover:bg-secondary"
-          type="button"
-        >
-          Login / Register
-        </Button>
+        {token && (
+          <Button
+            className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-lg text-white font-semibold bg-primary hover:bg-secondary"
+            type="button"
+          >
+            Login / Register
+          </Button>
+        )}
       </nav>
     </header>
   );

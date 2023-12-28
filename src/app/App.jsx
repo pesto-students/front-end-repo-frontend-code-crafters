@@ -6,11 +6,11 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import Home from "./pages/Home.jsx";
-import NotFound from "./pages/NotFound";
-import Layout from "./components/Layout";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
+import Home from "../pages/Home.jsx";
+import NotFound from "../pages/NotFound.jsx";
+import Layout from "../components/Layout.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
