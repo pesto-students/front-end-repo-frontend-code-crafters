@@ -1,0 +1,30 @@
+[
+    {
+      "class": "product-4x",
+      "img": "/image26@2x.png",
+      "name": "Green Apple",
+      "price": "₹14.99",
+      "star":4
+    },
+    {
+      "class": "product-4x1",
+      "img": "/image27@2x.png",
+      "name": "Chanise Cabbage",
+      "price": "₹14.99",
+      "star":4
+    },
+    {
+      "class": "product-4x2",
+      "img": "/image28@2x.png",
+      "name": "Green Capsicum",
+      "price": "₹14.99",
+      "star":4
+    },
+    {
+      "class": "product-4x3",
+      "img": "/image3@2x.png",
+      "name": "Green Littuce",
+      "price": "₹14.99",
+      "star":4
+    }
+  ]
