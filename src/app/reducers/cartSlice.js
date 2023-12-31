@@ -6,6 +6,7 @@ const initialState = {
 
 const cartSlice = createSlice({
   name: "cart",
+  initialState,
   reducers: {
     addProduct: (state, action) => {
       const existingProduct = state.cart.find(
@@ -25,5 +26,20 @@ const cartSlice = createSlice({
     },
   },
 });
+
+const cartCountSelector = (state) => {
+  return state.cart.reduce((total, product) => total + product.quantity, 0);
+};
+
+const cartValueSelector = (state) => {
+  return state.cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
+};
+
+export { cartCountSelector, cartValueSelector };
+
+export const { addProduct, removeProduct } = cartSlice.actions;
 
 export default cartSlice.reducer;

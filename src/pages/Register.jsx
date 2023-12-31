@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const Register = () => {
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  const { user, status, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // redirect user to login page if registration was successful
+    if (success) navigate("/login");
+    // redirect authenticated user to profile screen
+    if (userInfo) navigate("/user-profile");
+  }, [navigate, userInfo, success]);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -17,10 +27,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Form submitted");
-      console.log(data);
       const url = `${VITE_API_URL}/user/register`;
-      console.log(url);
       const { data: res } = await fetch(url, {
         method: "POST",
         headers: {
@@ -29,7 +36,7 @@ const Register = () => {
         },
         body: JSON.stringify(data),
       });
-      navigate("/login");
+      navigate("/home");
       console.log(res.message);
     } catch (error) {
       if (
@@ -102,13 +109,6 @@ const Register = () => {
             </div>
 
             <div>
-              {/* <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                </label>
-              </div> */}
               <div className="mt-2">
                 <input
                   id="password"
