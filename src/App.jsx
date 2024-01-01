@@ -19,7 +19,9 @@ import LoginForm from './components/LoginForm/LoginFOrm';
 import WishList from './components/WishList/WishList'
 import Layout from './components/Layout/Layout';
 import ProductDetails from './components/ProductDetails/ProductDetails';
-
+import Login from './pages/Login'
+import Register from './pages/Register';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   
@@ -48,7 +50,7 @@ const App = () => {
         path="/login"
         element={
           
-            <LoginForm />
+            <LoginForm/>
           
         }
       />
@@ -57,6 +59,22 @@ const App = () => {
         element={
           
             <SignUp />
+          
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          
+            <Register />
+          
+        }
+      />
+      <Route
+        path="/*"
+        element={
+          
+            <NotFound />
           
         }
       />
