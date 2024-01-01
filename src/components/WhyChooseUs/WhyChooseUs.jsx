@@ -1,5 +1,6 @@
 import React from "react";
 import Wcheck from "../assets/Wcheck.svg";
+import { Link } from "react-router-dom";
 
 const WhyChooseUs = () => {
   return (
@@ -48,12 +49,15 @@ const WhyChooseUs = () => {
         </div>
         
           {" "}
+          <Link to="/shop">
           <button className="px-10 py-4 bg-green-600 rounded-[43px] justify-center items-center gap-4 inline-flex">
             <div className="text-white text-base font-semibold font-['Poppins'] leading-tight">
               Shop Now
             </div>
             <div className="w-[15px] h-3 relative"></div>
           </button>
+          </Link>
+
         
       </div>
       <div className="w-[2189px] h-[558px] left-[-304px] top-[24px] absolute">
@@ -61,19 +65,19 @@ const WhyChooseUs = () => {
       </div>
       <div className="w-[809px] h-[513px] left-[235px] top-[24px] absolute">
         <img
-          className="w-[31.19px] h-[104.69px] left-[336.18px] top-[80.20px] absolute origin-top-left rotate-[140deg] blur-sm"
+          className="w-[31.19px] h-[104.69px] left-[316.18px] top-[80.20px] absolute origin-top-left rotate-[140deg] blur-sm"
           src="/image22@2x.png"
         />
         <img
-          className="w-[444px] h-[457px] left-[365px] top-[56px] absolute rounded-lg"
+          className="w-[444px] h-[457px] left-[345px] top-[56px] absolute rounded-lg"
           src="/image23@2x.png"
         />
         <img
-          className="w-[276px] h-[400px] left-[65px] top-[56px] absolute rounded-lg"
+          className="w-[276px] h-[400px] left-[45px] top-[56px] absolute rounded-lg"
           src="/image24@2x.png"
         />
         <img
-          className="w-[60px] h-[88px] left-[62.23px] top-[384px] absolute origin-top-left rotate-45"
+          className="w-[60px] h-[88px] left-[42.23px] top-[384px] absolute origin-top-left rotate-45"
           src="/image25@2x.png"
         />
       </div>

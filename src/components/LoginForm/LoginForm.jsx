@@ -92,7 +92,7 @@ const LoginForm = () => {
         >
           Login with Google
         </button>
-        <div className='text-gray-600 text-base'>Don't have a Account <Link to='signup' className="text-teal-900">Register</Link></div>
+        <div className='text-gray-600 text-base'>Don't have a Account <Link to='/login/signup' className="text-teal-900">Register</Link></div>
         
       </form>
       

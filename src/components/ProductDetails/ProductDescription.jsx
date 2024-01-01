@@ -1,24 +1,14 @@
-import React, { useState } from "react";
-import RelatedProducts from "./RelatedProducts";
+import React, { useState , useEffect } from "react";
+
 import Star from "../assets/Star.svg";
 import Kristin from "../assets/Kristin.svg";
-import ProductImage from "./ProductImage";
-import FeaturedProducts from "../FeaturedProducts/FeaturedProducts";
-const ProductDetails = ({ product }) => {
-  const [selected, setSelected] = useState(null);
 
-  const handleSelect = (value) => {
-    setSelected(value);
-  };
+
+const ProductDescription = () => {
+
   return (
     <div>
-      <div className="w-[1320px] h-[558px] relative">
-        
-       <ProductImage/>
-      </div>
-
-      <div>
-        <div className="w-[1920px] h-14 px-[689px] bg-white shadow justify-start items-start inline-flex">
+      <div className="w-[1920px] h-14 px-[689px] bg-white shadow justify-start items-start inline-flex">
           <button
             className={`p-4 bg-white justify-start items-start flex hover:shadow-inner ${
               selected === "description" ? "shadow-inner" : ""
@@ -84,10 +74,8 @@ const ProductDetails = ({ product }) => {
         ) : (
           ""
         )}
-      </div>
-      <FeaturedProducts/>
     </div>
   );
 };
 
-export default ProductDetails;
+export default ProductDescription;

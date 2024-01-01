@@ -24,50 +24,88 @@ import ProductDetails from './components/ProductDetails/ProductDetails';
 const App = () => {
   
   return (
-    <ProductDetails/>
+    <Router>
+    <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route
+        index
+        element={
+          
+            <Homepage />
+         
+        }
+      />
+      <Route
+        path="/shop"
+        element={
+          
+            <Shoppage />
+          
+        }
+      />
+      <Route path="/products/:id" element={<ProductDetails/>} />
+      <Route
+        path="/login"
+        element={
+          
+            <LoginForm />
+          
+        }
+      />
+      <Route
+        path="/login/signup"
+        element={
+          
+            <SignUp />
+          
+        }
+      />
+      </Route>
+    </Routes>
+  </Router>
   );
 };
 
 export default App
 
 /*
-<Router>
-      <Routes>
-       
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Homepage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/shop"
-          element={
-            <Layout>
-              <Shoppage />
-            </Layout>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Layout>
-              <LoginForm />
-            </Layout>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <Layout>
-              <SignUp />
-            </Layout>
-          }
-        />
-        
-      </Routes>
-    </Router>
+  <Router>
+    <Routes>
+    <Route path="/" element={<Layout />}>
+      <Route
+        index
+        element={
+          
+            <Homepage />
+         
+        }
+      />
+      <Route
+        path="/shop"
+        element={
+          
+            <Shoppage />
+          
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          
+            <LoginForm />
+          
+        }
+      />
+      <Route
+        path="/login/signup"
+        element={
+          
+            <SignUp />
+          
+        }
+      />
+      </Route>
+    </Routes>
+  </Router>
       
       */
