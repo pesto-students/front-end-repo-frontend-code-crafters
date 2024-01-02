@@ -1,14 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../app/reducers/authSlice";
-import Hero from '../components/Hero';
-import Services from '../components/Services';
-import TopCategories from "../components/TopCategories";
-import WhyChooseUs from "../components/WhyChooseUs";
-import FeaturedProducts from '../components/FeaturedProducts';
+import FeaturedProductGrid from "../components/FeaturedProductGrid";
 
 
-const Home = () => {
+
+const Shop = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -21,11 +18,7 @@ const Home = () => {
     <div className="text-black">
       <nav>
         
-        <Hero/>
-        <Services/>
-        <FeaturedProducts/>
-        <TopCategories/>
-        <WhyChooseUs/>
+        <FeaturedProductGrid/>
        
         {/* <button
           className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-lg text-white font-semibold bg-primary hover:bg-secondary"
@@ -39,4 +32,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Shop;
