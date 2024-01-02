@@ -254,7 +254,7 @@
   overflow: hidden;
 }
 .footer {
-  top: 2175px;
+  top: 6275px;
   left: 0;
   background-color: var(--color-gray-100);
   width: 1920px;
@@ -1590,15 +1590,6 @@
   width: 1920px;
   height: 617px;
 }
-
-.foot {
-  position: absolute;
-  top: 2698px;
-  left: 0;
-  width: 1920px;
-  height: 617px;
-  background:'#1A1A1A'
-}
 .bg-icon6 {
   top: 0;
   width: 2002.65px;
@@ -2797,4 +2788,16 @@
   font-size: var(--body-large-body-large-600-size);
   color: var(--color-gray-100);
   font-family: var(--display-01-display-01-600);
+}
+/* ... (other styles remain the same) */
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap between products */
+}
+
+.product-item {
+  flex: 1 0 300px; /* Adjust the width of each product item */
+  /* ... (other styles for product items) */
 }

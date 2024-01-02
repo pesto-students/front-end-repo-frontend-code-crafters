@@ -9,25 +9,25 @@ import './Homepage.css';
 const FeaturedProducts = () => {
   const vegetablesData = [
     {
-      class: 'product-4x',
+      class: 'products-5x',
       img: '/image26@2x.png',
       name: 'Green Apple',
       price: '₹14.99',
     },
     {
-      class: 'product-4x1',
+      class: 'products-5x1',
       img: '/image27@2x.png',
       name: 'Chanise Cabbage',
       price: '₹14.99',
     },
     {
-      class: 'product-4x2',
+      class: 'products-5x2',
       img: '/image28@2x.png',
       name: 'Green Capsicum',
       price: '₹14.99',
     },
     {
-      class: 'product-4x3',
+      class: 'products-5x3',
       img: '/image29@2x.png',
       name: 'Ladies Finger',
       price: '₹14.99',
@@ -57,29 +57,31 @@ const FeaturedProducts = () => {
           <img className="arrow-icon" alt="" src={GreenArrow} />
         </div>
       </div>
-      <div className="product10">
+      <div className="products-5x-parent">
         {vegetablesData.map((vegetable, index) => (
-          <div className={vegetable.class} key={index}>
-            <div className="product-image">
-              <img className="image-icon26" alt="" src={vegetable.img} />
-            </div>
-            <div className="product-info14">
-              <div className="testimonial-parent">
-                <div className="green-apple5">{vegetable.name}</div>
-                <div className="price8">
-                  <div className="address">{vegetable.price}</div>
-                </div>
-              </div>
-              <div className="rating3">
-                <img className="rating-child12" alt="" src={Star} />
-                <img className="rating-child12" alt="" src={Star} />
-                <img className="rating-child12" alt="" src={Star} />
-                <img className="rating-child12" alt="" src={Star} />
-                <img className="rating-child12" alt="" src={GStar} />
-              </div>
-            </div>
-            <img className="add-to-cart7" alt="" src={Bag} />
-          </div>
+         <div className={vegetable.class} key={index}>
+         <img className="image-icon6" alt="" src={vegetable.img} />
+         <div className="product-info">
+           <div className="testimonial-parent">
+             <div className="green-apple">{vegetable.name}</div>
+             <div className="price">
+               <div className="address">{vegetable.price}</div>
+             </div>
+           </div>
+           <div className="rating3">
+             <img className="rating-child12" alt="" src="/star-1.svg" />
+             <img className="rating-child12" alt="" src="/star-1.svg" />
+             <img className="rating-child12" alt="" src="/star-1.svg" />
+             <img className="rating-child12" alt="" src="/star-1.svg" />
+             <img className="rating-child12" alt="" src="/star-5.svg" />
+           </div>
+         </div>
+         <img className="add-to-cart" alt="" src="/add-to-cart.svg" />
+         <div className="tag">
+           <div className="helpharvestlycom">Sale</div>
+           <div className="address">50%</div>
+         </div>
+       </div>
         ))}
       </div>
       <img className="featured-products-child" alt="" src="/group-6.svg" />
