@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// initialize token from local storage
-const token = localStorage.getItem("token")
-  ? localStorage.getItem("token")
+// initialize token from session storage
+const token = sessionStorage.getItem("token")
+  ? sessionStorage.getItem("token")
   : null;
 
 const initialState = {
   user: null,
   status: "idle",
-  error: null, // for monitoring the registration process.
+  error: null,
 };
 
 const authSlice = createSlice({
