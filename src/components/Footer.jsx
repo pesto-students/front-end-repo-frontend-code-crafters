@@ -41,7 +41,7 @@ const PageFooter = () => {
           <img src={socialMedia} alt="social media logos"></img>
         </div>
       </section>
-      <div className="flex items-center justify-between border-t border-gray-400 py-1">
+      <div className="flex items-center justify-between border-t border-gray-400 py-4">
         <p className="font-normal text-xs pl-10">Harvestly © 2023. All Rights Reserved</p>
         <p className="font-normal text-xs">Privacy Policy</p>
         <img src={paymentGateways} alt="payment gateways" className="pr-10"></img>

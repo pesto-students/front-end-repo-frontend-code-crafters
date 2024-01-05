@@ -7,6 +7,7 @@ import NotFound from "../pages/NotFound.jsx";
 import Navbar from "../components/Navbar.jsx";
 import PageFooter from "../components/Footer.jsx";
 import Landing from "../pages/Landing.jsx";
+import Shop from "../pages/Shop.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="home" element={<Home />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
+            <Route path="shop" element={<Shop />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

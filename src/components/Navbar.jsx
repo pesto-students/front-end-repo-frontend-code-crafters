@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LogoText from "./LogoText";
 import greenLogo from "../assets/logo/logo-no-bg-green.png";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
 import { logout } from "../app/reducers/authSlice";
+import search from "../assets/shop/search.png";
+import cart from "../assets/shop/cart.png";
+import wishlist from "../assets/shop/wishlist.png";
+import divider from "../assets/shop/divider.png";
+import avatar from "../assets/shop/avatar.png";
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token")
@@ -19,10 +25,13 @@ export default function Navbar() {
     dispatch(logout());
     navigate("/login");
   };
+  const handleSearchSubmit = () => {
+    alert("Search clicked");
+  };
 
   return (
     <header>
-      <nav className="flex justify-center items-center w-full h-150px bg-white shadow-md">
+      <nav className="flex justify-between items-center w-full h-150px bg-white shadow-md">
         <Link to="/">
           <LogoText
             div="flex items-center space-x-2 h-20 w-auto ml-5"
@@ -30,6 +39,80 @@ export default function Navbar() {
             src={greenLogo}
           />
         </Link>
+        {path == "/shop" && (
+          <>
+            <form>
+              <label
+                htmlFor="default-search"
+                className="mb-2 text-sm font-medium text-gray-900 sr-only"
+              >
+                Search
+              </label>
+              <div className="relative ml-20 w-72">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <img src={search} />
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block w-full p-4 ps-10 text-sm text-gray-900 border border-green-500 rounded-lg bg-white"
+                  placeholder="Fruits, vegetables..."
+                  required
+                />
+                <Button
+                  type="submit"
+                  className="text-white absolute end-2.5 bottom-2.5 bg-primary focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2"
+                  onClick={handleSearchSubmit}
+                >
+                  Search
+                </Button>
+              </div>
+            </form>
+            <div className="flex items-center justify-between ml-32">
+              <Link to="/wishlist">
+                <img
+                  className="h-6 w-6 mr-2"
+                  src={wishlist}
+                  alt="wishlist icon"
+                />
+              </Link>
+              <img className="" src={divider} alt="divider icon" />
+              <Link to="/cart">
+                <img className="h-6 w-6 ml-2" src={cart} alt="cart icon" />
+              </Link>
+              <div className="relative inline-block text-left ml-10 mb-2">
+                <div>
+                  <button type="button" onClick={() => setIsOpen(!isOpen)}>
+                    <img
+                      src={avatar}
+                      className="inline-block h-8 w-8 rounded-full"
+                      alt="Avatar"
+                    />
+                  </button>
+                </div>
+
+                {isOpen && (
+                  <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div
+                      className="py-1"
+                      role="menu"
+                      aria-orientation="vertical"
+                      aria-labelledby="options-menu"
+                    >
+                      <button onClick={handleLogout} className="w-full"><a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                        role="menuitem"
+                      >
+                        Logout
+                      </a></button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        )}
         {!token && path !== "/login" && path !== "/register" && (
           <Button
             className="flex items-center ml-auto mr-5 h-10 w-auto px-3 py-4 rounded-lg text-white font-medium bg-primary hover:bg-secondary"
