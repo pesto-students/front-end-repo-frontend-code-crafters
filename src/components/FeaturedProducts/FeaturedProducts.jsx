@@ -7,25 +7,46 @@ import Bag from '../assets/plus.svg';
 import { Link } from 'react-router-dom';
 
 
+
 const FeaturedProducts = () => {
   // Create a state variable to store the API data
-
+  const [showQuantitySelector, setShowQuantitySelector] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  
 const [vegetablesData, setVegetablesData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:9001/api/products'); // Assuming your API is running on the same host as your frontend
-        setVegetablesData(response.data.slice(0, 4));
-      } catch (error) {
-        // Handle error
-        console.error('Error fetching data:', error);
-      }
-    };
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://localhost:9001/api/products');
+      setVegetablesData(response.data.slice(0, 4));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchData();
 
+  const token = localStorage.getItem('token');
+  if (token) {
+    setIsLoggedIn(true);
+    fetchCurrentUser();
+  }
+}, []);
+ 
+ const fetchCurrentUser = async () => {
+  try {
+    const response = await axios.get('http://localhost:9001/api/currentuser');
+    if (response.data.loggedInUsers.length > 0) {
+      const fetchedUserId = response.data.loggedInUsers[0].userId;
+      setUserId(fetchedUserId); // Set the userId in state
+    }
+  } catch (error) {
+    console.error('Error fetching current user:', error);
+  }
+};
 // Assuming 'message' is a state to handle success or error messages
 const [message, setMessage] = useState('');
 
@@ -33,15 +54,29 @@ const addToCart = async (id) => {
   try {
     const response = await axios.post('http://localhost:9001/api/cart/add', {
       productId: id,
-      quantity: 1, // You can modify the quantity if needed
+      quantity: 1,
+      userId: userId, // Use the userId from state directly
     });
+
     console.log(response.data); // Handle the response as needed
   } catch (error) {
     console.error('Error adding to cart:', error);
   }
 };
 
-
+const handleQuantityChange = (id, change) => {
+  // Find the product in the data by ID
+  const updatedData = vegetablesData.map((vegetable) => {
+    if (vegetable._id === id) {
+      // Change the quantity based on the operation (increase or decrease)
+      vegetable.quantity = vegetable.quantity + change >= 0 ? vegetable.quantity + change : 0;
+    }
+    return vegetable;
+  });
+  setVegetablesData(updatedData);
+  // Update the cart with the new quantity
+  addToCart(id, updatedData.find((item) => item._id === id).quantity);
+};
 
 // Rest of your code remains the same
 
@@ -72,6 +107,7 @@ const handleProductLeave = () => {
         
         <div className="grid grid-cols-4 gap-6 mt-20">
           {vegetablesData.map((vegetable, index) => (
+            
             <Link to={`/products/${vegetable.id}`} key={index}>
             <div className={`product-4x${index + 1} relative hover:scale-105 transform transition duration-300 ease-in-out`} >
               <div className="product-image">
@@ -97,8 +133,17 @@ const handleProductLeave = () => {
                     ))}
                 </div>
               </div>
-              <img className="add-to-cart7 absolute right-0" alt="" src={Bag} onClick={() => addToCart(vegetable._id)} />
+              {isLoggedIn ? (
+    <img className="add-to-cart7 absolute right-0" alt="" src={Bag} onClick={() => addToCart(vegetable.id)} />
+  ) : (
+    <div onClick={() => alert('Please log in to add to cart')}>
+      {/* Placeholder for non-logged in user, could be a button or a different UI */}
+      {/* You can customize this to suit your design */}
+      <img className="add-to-cart7 absolute right-0" alt="" src={Bag}  />
+    </div>
+  )}
             </div>
+            
             </Link>
             
           ))}
@@ -109,3 +154,4 @@ const handleProductLeave = () => {
 };
 
 export default FeaturedProducts;
+

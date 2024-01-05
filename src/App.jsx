@@ -16,18 +16,21 @@ import Navbar from "./components/Navbar/Navbar"
 import TopCategories from "./components/TopCategories/TopCategories"
 import LoginForm from './components/LoginForm/LoginFOrm';
 
-import WishList from './components/WishList/WishList'
+
 import Layout from './components/Layout/Layout';
 import ProductDetails from './components/ProductDetails/ProductDetails';
 import Login from './pages/Login'
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
+import { NavbarProvider } from './components/Navbar/NavbarContext';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
   
   return (
     <Router>
-    <Routes>
+      <NavbarProvider>
+            <Routes>
     <Route path="/" element={<Layout />}>
       <Route
         index
@@ -46,6 +49,7 @@ const App = () => {
         }
       />
       <Route path="/products/:id" element={<ProductDetails/>} />
+      <Route path="/products/cart" element={<Cart/>} />
       <Route
         path="/login"
         element={
@@ -80,6 +84,7 @@ const App = () => {
       />
       </Route>
     </Routes>
+    </NavbarProvider>
   </Router>
   );
 };

@@ -42,6 +42,7 @@ const ProductDetails = ({ product }) => {
         </div>
         {selected === "description" ? (
           <div className="w-[648px] text-zinc-500 text-sm font-normal font-['Poppins'] leading-[21px]">
+            
             Sed commodo aliquam dui ac porta. Fusce ipsum felis, imperdiet at
             posuere ac, viverra at mauris. Maecenas tincidunt ligula a sem
             vestibulum pharetra. Maecenas auctor tortor lacus, nec laoreet nisi

@@ -1,26 +1,93 @@
-
 import React, { useState, useEffect } from "react";
 import Star from '../assets/Star.svg';
 import GStar from '../assets/Star 5.svg';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 
+
+let userId = null;
+let quantity = null;
 const ProductData = () => {
   const [product, setProduct] = useState(null);
-  const { id } = useParams(); // Get the ID parameter from the URL
-
+  const {  id } = useParams(); // Get the ID parameter from the URL
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userIdd, setUserId] = useState(null);
+  const [quantityy , setProductQuantity] = useState(null);
+  
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/products/${id}`); // Fetch data for the specific product ID
+        const response = await axios.get(`http://localhost:9001/api/products/${id}`);
         setProduct(response.data);
+  
+        const token = localStorage.getItem('token');
+        if (token) {
+          setIsLoggedIn(true);
+          fetchCurrentUser();
+          
+          
+          fetchCurrentProduct();
+            // Now that userId is set, fetch the current product quantity
+            
+          
+        }
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error('Error fetching data:', error);
       }
     };
-
-    fetchProduct();
+  
+    fetchData();
   }, [id]); // Fetch data whenever ID changes
+   // Fetch data whenever ID changes
+ 
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await axios.get('http://localhost:9001/api/currentuser');
+      const loggedInUsers = response.data.loggedInUsers;
+      if (loggedInUsers.length > 0) {
+        const fetchedUserId = loggedInUsers[0].userId;
+        userId = fetchedUserId;
+        setUserId(fetchedUserId);
+         // Set the userId in state
+      }
+    } catch (error) {
+      console.error('Error fetching current user:', error);
+    }
+  };
+  const fetchCurrentProduct = async () => {
+    try { const uid = userId;
+      const response = await axios.get(`http://localhost:9001/api/cart/${uid}/${id}/quantity`);
+      //if (response.data.quantity.length > 0) {
+        const fetchedUserProductQuantity = response.data.quantity;
+        quantity = fetchedUserProductQuantity;
+      
+        //alert(fetchedUserProductQuantity);
+       setProductQuantity(quantity); // Set the userId in state
+     // }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  };
+
+  const handlePlusClick = async () => {
+    try {const uid = userId;
+      const response = await axios.put(`http://localhost:9001/api/app/cart/${uid}/${id}/quantity/add`);
+      // Update the quantity in the state upon successful API call
+      setProductQuantity(response.data.newQuantity);
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  };
+
+  const handleSubClick = async () => {
+    try {const uid = userId;
+      const response = await axios.put(`http://localhost:9001/api/app/cart/${uid}/${id}/quantity/sub`);
+      // Update the quantity in the state upon successful API call
+      setProductQuantity(response.data.newQuantity);
+    } catch (error) {
+      console.error('Error updating quantity:', error);
+    }
+  };
 
   return ( <div>
     {product ? (
@@ -102,10 +169,11 @@ const ProductData = () => {
                 className="w-3.5 h-3.5 left-[10px] top-[10px] absolute"
                 alt=""
                 src="/plus-1@2x.png"
+                onClick={handlePlusClick} 
               />
             </div>
             <div className="w-10 text-center text-zinc-900 text-base font-normal font-['Poppins'] leading-normal">
-              5
+            {quantityy !== null ? quantityy : '0'}
             </div>
             <div className="w-[34px] h-[34px] relative">
               <div className="w-[34px] h-[34px] left-0 top-0 absolute bg-zinc-100 rounded-[170px]" />
@@ -113,17 +181,21 @@ const ProductData = () => {
                 className="w-3.5 h-3.5 left-[10px] top-[10px] absolute"
                 alt=""
                 src="/minus@2x.png"
+                onClick={handleSubClick} 
               />
             </div>
           </div>
-
+          <Link to={`/products/cart`}>
           <div className="p-4 bg-green-600 bg-opacity-10 rounded-[43px] justify-start items-start gap-2.5 flex">
-            <img className="w-5 h-5 relative" alt="" src="/heart@2x.png" />
+            <img className="w-5 h-5 relative" alt="" src="/bag@2x.png" />
           </div>
+          </Link>
 </div>
+
 </div>) : (
         <p>Loading...</p>
       )}
+      
     </div>
 );
 };

@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
+import { createAuthUserWithEmailAndPassword } from '../../utlis/firebase/firebase.utils';
+
+
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [confirmPassword , setConfirmPassword] = useState('');
+  
+  
+  const resetFormFields = () => {
+    setEmail('');
+    setPassword('');
+    setRememberMe(false);
+    setConfirmPassword('');
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -17,26 +28,70 @@ const SignUp = () => {
     setRememberMe(e.target.checked);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Login logic here with 'email' and 'password'
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember Me:', rememberMe);
-    // Sending login credentials to the server for authentication
-  };
+  const handleConfirmPassword = (e) => {
+    setConfirmPassword(e.target.value)
+  }
+/*
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    // SignUp logic here
-    console.log('SignUp - Email:', email);
-    console.log('SignUp - Password:', password);
+    if (password !== confirmPassword) {
+      alert("passwords do not match");
+      return;
+    }
+
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      //await createUserDocumentFromAuth(user, { displayName });
+      resetFormFields();
+      setCurrentUser(user);
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot create user, email already in use");
+      } else {
+        console.log("user creation encountered an error", error);
+      }
+    }
   };
+*/
+function generateUserId() {
+  return 'user_' + Date.now(); // Creating a user ID based on timestamp
+}
+
+const handleSignUp = async (e) => {
+  e.preventDefault();
+  const userId = generateUserId(); // Generate or fetch the user ID (you may use a function or library to generate unique IDs)
+  try {
+    const response = await fetch('http://localhost:9001/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, userId }), // Include userId in the signup request body
+    });
+
+    if (response.ok) {
+      // Handle successful sign-up
+      localStorage.setItem('userId', userId);
+      window.location.href = 'http://localhost:5173/login';
+    } else {
+      // Handle sign-up errors
+    }
+  } catch (error) {
+    console.error('Sign-up failed:', error);
+  }
+};
+
+  
 
   return (
     <div className="flex justify-center items-center h-screen">
       <form className="w-72 border border-gray-300 rounded-lg p-4 shadow-md">
-        <h2>Sign Up</h2>
+        <h2  style={{ color: 'black' }} >Sign Up</h2>
         <div className="mb-4">
           <label htmlFor="email" className="block"></label>
           <input
@@ -47,6 +102,7 @@ const SignUp = () => {
             required
             className="w-full mb-2 px-2 py-1 border rounded outline-none shadow-inner"
             placeholder="Enter email"
+            style={{ color: 'black' }} 
           />
         </div>
         <div className="mb-4">
@@ -59,6 +115,7 @@ const SignUp = () => {
             required
             className="w-full mb-2 px-2 py-1 border rounded outline-none shadow-inner"
             placeholder="Enter password"
+            style={{ color: 'black' }} 
           />
         </div>
         <div className="mb-4">
@@ -66,11 +123,12 @@ const SignUp = () => {
           <input
             type="password"
             id="password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={confirmPassword}
+            onChange={handleConfirmPassword}
             required
             className="w-full mb-2 px-2 py-1 border rounded outline-none shadow-inner"
             placeholder="Confirm password"
+            style={{ color: 'black' }} 
           />
         </div>
         <div className="flex justify-between items-center mb-4">
@@ -86,8 +144,9 @@ const SignUp = () => {
           
         
         </div>
+        
         <button
-          onClick={handleLogin}
+          onClick={handleSignUp}
           className="w-full py-2 bg-green-500 text-white rounded-full cursor-pointer mb-2"
           type="submit"
         >
