@@ -9,13 +9,13 @@ import arrow from "../assets/products/arrow.png";
 
 import Product from "../components/Product";
 import Category from "../components/Category";
-import vegetables from "../assets/vegetables.png";
-import fruits from "../assets/fruits.png";
-import drinks from "../assets/drinks.png";
-import snacks from "../assets/snacks.png";
-import farmer from "../assets/farmer-1.png";
-import farmer2 from "../assets/farmer-2.png";
-import check from "../assets/check.png"
+import vegetables from "../assets/category/vegetables.png";
+import fruits from "../assets/category/fruits.png";
+import drinks from "../assets/category/drinks.png";
+import snacks from "../assets/category/snacks.png";
+import farmer from "../assets/landing/farmer-1.png";
+import farmer2 from "../assets/landing/farmer-2.png";
+import check from "../assets/landing/check.png"
 function Landing() {
   return (
     <>
@@ -100,8 +100,8 @@ function Landing() {
         </div>
       </section>
 
-      {/* SHOP BY CATEGORY */}
-      <section className="flex justify-center items-start">
+      {/* WHY CHOOSE US */}
+      <section className="flex justify-center items-start mb-10">
         <img src={farmer} alt="vegetable basket" className="h-80 w-72 mr-5" style={{paddingLeft: "5%"}}/>
         <img src={farmer2} alt="vegetable basket" height={450} width={450} />
         <div className="block mt-10 ml-10 w-2/5">
@@ -119,8 +119,11 @@ function Landing() {
           </p></div>
           
           <Link to="/shop">
-            <Button className="flex items-center mt-5 h-10 w-auto px-3 py-4 rounded-3xl font-medium text-sm text-white bg-primary hover:bg-secondary">
-              {`Shop Now`}
+            <Button className="flex items-center mt-5 h-10 w-28 px-3 py-4 mr-2 rounded-3xl font-medium text-sm text-white bg-primary hover:bg-secondary">
+              Shop Now<svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 17 15" fill="none">
+<path d="M16 7.50049H1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.95001 1.47559L16 7.49959L9.95001 13.5246" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
             </Button>
           </Link>
         </div>
