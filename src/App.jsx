@@ -14,7 +14,7 @@ import FeaturedProductGrid from "./components/FeaturedProductGrid/FeaturedProduc
 import SignUp from "./components/SignUp/SignUp"
 import Navbar from "./components/Navbar/Navbar"
 import TopCategories from "./components/TopCategories/TopCategories"
-import LoginForm from './components/LoginForm/LoginFOrm';
+import LoginForm from './components/LoginForm/LoginForm';
 
 
 import Layout from './components/Layout/Layout';
