@@ -68,17 +68,21 @@ export default function Navbar() {
                 </Button>
               </div>
             </form>
-            <div className="flex items-center justify-between ml-32">
+            {/* WISHLIST - CART */}
+            <div className="relative flex items-center justify-between ml-auto">
               <Link to="/wishlist">
                 <img
-                  className="h-6 w-6 mr-2"
+                  className="h-8 w-8 mr-2"
                   src={wishlist}
                   alt="wishlist icon"
                 />
               </Link>
               <img className="" src={divider} alt="divider icon" />
               <Link to="/cart">
-                <img className="h-6 w-6 ml-2" src={cart} alt="cart icon" />
+              <div className="relative">
+                <img className="h-8 w-8 ml-2" src={cart} alt="cart icon" />
+              <p className="text-xs flex justify-center items-center absolute top-0 right-0 h-4 w-4 px-2 py-1 rounded-full bg-primary text-white">10</p>
+              </div>
               </Link>
               <div className="relative inline-block text-left ml-10 mb-2">
                 <div>
@@ -99,13 +103,15 @@ export default function Navbar() {
                       aria-orientation="vertical"
                       aria-labelledby="options-menu"
                     >
-                      <button onClick={handleLogout} className="w-full"><a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                        role="menuitem"
-                      >
-                        Logout
-                      </a></button>
+                      <button onClick={handleLogout} onMouseLeave={() => setIsOpen(!isOpen)} className="w-full">
+                        <a
+                          href="#"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                          role="menuitem"
+                        >
+                          Logout
+                        </a>
+                      </button>
                     </div>
                   </div>
                 )}

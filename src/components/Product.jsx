@@ -1,10 +1,11 @@
-import { Transition } from "@headlessui/react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { useSelector, useDispatch } from "react-redux";
 // import { addProduct, removeProduct } from "./app/store.js";
+import { Rating } from "@material-tailwind/react";
+
 import Button from "./Button.jsx";
 import apple from "../assets/products/apple.png";
-import { useState } from "react";
 
 export default function Product(props) {
   const [quantity, setQuantity] = useState(0);
@@ -41,35 +42,37 @@ export default function Product(props) {
     <>
       <div className="ml-5 mt-5 h-80 w-64 border border-gray-100 rounded-lg text-black">
         <Link to={`/*`}>
-          <img className="px-1 pt-1 mb-1" src={apple} alt="Apple" />
+          <img className="px-1 pt-1" src={apple} alt="Apple" />
         </Link>
         <div className="flex justify-between items-center">
-          <div className="mr-2  ">
-            <p className="text-xs pl-2 text-gray-500">Product Name</p>
-            <p className="text-xs pl-2 text-gray-900 mb-0.5">
-              ₹Product Price{" "}
+          <div className="">
+            <p className="text-sm pl-2 text-gray-500">Product Name</p>
+            <p className="text-sm pl-2 text-gray-900">
+              ₹ Product Price{" "}
               <span className="text-gray-400 line-through">₹29.99</span>
             </p>
-            <p className="text-xs pl-2 text-gray-700">Rating</p>
+            <div className="h-3 w-3 pl-2 pb-2">
+              <Rating value={4} readonly />
+            </div>
           </div>
           <div className="flex items-center border border-gray-300 rounded-full mr-1">
+            {quantity > 0 && (
+              <>
+                <Button
+                  className="flex items-center flex-grow justify-center rounded-full h-8 w-8 text-xl bg-gray-100 hover:bg-gray-300"
+                  onClick={subtractQuantity}
+                >
+                  -
+                </Button>
+                <p className="px-3 text-sm">{quantity}</p>
+              </>
+            )}
             <Button
               className="flex items-center flex-grow justify-center rounded-full outline-offset-2 h-8 w-8 text-xl bg-gray-100 hover:bg-gray-300"
               onClick={addQuantity}
             >
               +
             </Button>
-            {quantity > 0 && (
-              <>
-                <p className="mx-2 text-sm">{quantity}</p>
-                <Button
-                  className="flex items-center flex-grow justify-center right-0 rounded-full h-8 w-8 text-xl bg-gray-100 hover:bg-gray-300"
-                  onClick={subtractQuantity}
-                >
-                  -
-                </Button>
-              </>
-            )}
           </div>
         </div>
       </div>
