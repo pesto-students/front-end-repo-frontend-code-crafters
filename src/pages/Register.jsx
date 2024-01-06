@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
@@ -12,13 +12,6 @@ const Register = () => {
   const { user, status, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // redirect user to login page if registration was successful
-    if (success) navigate("/login");
-    // redirect authenticated user to profile screen
-    if (userInfo) navigate("/user-profile");
-  }, [navigate, userInfo, success]);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -36,8 +29,10 @@ const Register = () => {
         },
         body: JSON.stringify(data),
       });
+      const token = await res.json();
+      localStorage.setItem("token", token.data);
+      dispatch(loginSuccess(token));
       navigate("/home");
-      console.log(res.message);
     } catch (error) {
       if (
         error.response &&
@@ -51,6 +46,8 @@ const Register = () => {
 
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
+    localStorage.setItem("token", true);
+    dispatch(loginSuccess(true)).then(() => navigate("/home"))
   };
 
   return (

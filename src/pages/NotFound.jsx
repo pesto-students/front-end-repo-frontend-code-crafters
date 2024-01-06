@@ -13,7 +13,7 @@ export default function NotFound() {
         <Button
           className="text-white bg-primary font-medium rounded-full text-sm px-4 py-2"
         >
-          Return to Home
+          Back to Home
         </Button>
       </Link>
     </div>

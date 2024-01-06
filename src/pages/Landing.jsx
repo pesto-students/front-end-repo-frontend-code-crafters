@@ -6,6 +6,7 @@ import shippingIcon from "../assets/landing/icon-1.png";
 import guaranteeIcon from "../assets/landing/icon-2.png";
 import secureIcon from "../assets/landing/icon-3.png";
 import arrow from "../assets/products/arrow.png";
+import rightArrow from "../assets/landing/arrow.svg";
 
 import Product from "../components/Product";
 import Category from "../components/Category";
@@ -15,13 +16,19 @@ import drinks from "../assets/category/drinks.png";
 import snacks from "../assets/category/snacks.png";
 import farmer from "../assets/landing/farmer-1.png";
 import farmer2 from "../assets/landing/farmer-2.png";
-import check from "../assets/landing/check.png"
+import check from "../assets/landing/check.png";
 function Landing() {
   return (
     <>
       {/* HERO */}
       <section className="flex w-auto mt-2 bg-green-50">
-        <img src={heroImage} alt="vegetable basket" className="" height={800} width={500} />
+        <img
+          src={heroImage}
+          alt="vegetable basket"
+          className=""
+          height={800}
+          width={500}
+        />
         <div className="block mt-10 ml-10 w-2/5">
           <p className="text-secondary text-xs">WELCOME TO HARVESTLY</p>
           <h1 className="text-black mt-2 text-5xl font-semibold">
@@ -31,11 +38,15 @@ function Landing() {
             Sale up to <span className="text-orange-500">30% OFF</span>
           </h2>
           <p className="text-gray-500 text-xs mt-1">
-            Free shipping on all your order. We deliver, you enjoy!
+            Free shipping on all your orders. We deliver, you enjoy!
           </p>
           <Link to="/shop">
-            <Button className="flex items-center mt-5 h-10 w-auto px-3 py-4 rounded-3xl font-light text-sm text-white bg-primary hover:bg-secondary">
-              {`Shop Now`}
+            <Button className="flex items-center group mt-5 h-10 w-32 px-3 py-4 rounded-3xl font-medium text-sm text-white bg-primary">
+              Shop Now
+              <img
+                className="pl-2 transform group-hover:translate-x-3 transition-transform duration-300"
+                src={rightArrow}
+              />
             </Button>
           </Link>
         </div>
@@ -102,28 +113,38 @@ function Landing() {
 
       {/* WHY CHOOSE US */}
       <section className="flex justify-center items-start mb-10">
-        <img src={farmer} alt="vegetable basket" className="h-80 w-72 mr-5" style={{paddingLeft: "5%"}}/>
+        <img
+          src={farmer}
+          alt="vegetable basket"
+          className="h-80 w-72 mr-5"
+          style={{ paddingLeft: "5%" }}
+        />
         <img src={farmer2} alt="vegetable basket" height={450} width={450} />
         <div className="block mt-10 ml-10 w-2/5">
           <h1 className="text-black mt-2 text-5xl font-semibold">
             100% Trusted Organic Food Store
           </h1>
           <div className="flex items-center">
-          <img src={check} className="inline-block mr-1 my-3"/>
-          <p className="text-black text-xl mt-1 inline-block">Healthy & natural food for lovers of healthy food
-          </p></div>
+            <img src={check} className="inline-block mr-1 my-3" />
+            <p className="text-black text-xl mt-1 inline-block">
+              Healthy & natural food for lovers of healthy food
+            </p>
+          </div>
 
           <div className="flex items-center">
-          <img src={check} className="inline-block mr-1"/>
-          <p className="text-black text-xl mt-1 inline-block">Every day fresh and quality products for you.
-          </p></div>
-          
+            <img src={check} className="inline-block mr-1" />
+            <p className="text-black text-xl mt-1 inline-block">
+              Every day fresh and quality products for you.
+            </p>
+          </div>
+
           <Link to="/shop">
-            <Button className="flex items-center mt-5 h-10 w-28 px-3 py-4 mr-2 rounded-3xl font-medium text-sm text-white bg-primary hover:bg-secondary">
-              Shop Now<svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 17 15" fill="none">
-<path d="M16 7.50049H1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9.95001 1.47559L16 7.49959L9.95001 13.5246" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+            <Button className="flex items-center group mt-5 h-10 w-32 px-3 py-4 mr-2 rounded-3xl font-medium text-sm text-white bg-primary">
+              Shop Now{" "}
+              <img
+                className="pl-2 transform group-hover:translate-x-3 transition-transform duration-300"
+                src={rightArrow}
+              />
             </Button>
           </Link>
         </div>

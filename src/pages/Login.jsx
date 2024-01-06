@@ -1,21 +1,28 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginStart,
   loginSuccess,
   loginFailure,
 } from "../app/reducers/authSlice";
+import Cookies from 'js-cookie';
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { user, status, error } = useSelector((state) => state.auth);
   const [data, setData] = useState({ email: "", password: "" });
 
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
+    let cookieValue = Cookies.get('token');
+    console.log(cookieValue);
+    sessionStorage.setItem("token", cookieValue);
+    dispatch(loginSuccess(true)).then(() => navigate("/home"))
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -36,9 +43,9 @@ const Login = () => {
         body: JSON.stringify(data),
       });
       const token = await res.json();
-      localStorage.setItem("token", token.data);
+      sessionStorage.setItem("token", token.data);
       dispatch(loginSuccess(token));
-      window.location = "/home";
+      navigate("/home");
     } catch (error) {
       if (
         error.response &&
@@ -142,12 +149,12 @@ const Login = () => {
 
           <p className="mt-5 text-center text-sm text-black">
             No account? No problem. {"  "}
-            <a
-              href="/register"
+            <Link
+              to="/register"
               className="font-semibold leading-6 text-primary hover:text-secondary"
             >
               Create one!
-            </a>
+            </Link>
           </p>
         </div>
       </div>

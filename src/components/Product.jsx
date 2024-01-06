@@ -40,7 +40,7 @@ export default function Product(props) {
   };
   return (
     <>
-      <div className="ml-5 mt-5 h-80 w-64 border border-gray-100 rounded-lg text-black">
+      <div className="mt-1 h-80 w-64 border border-gray-100 rounded-lg text-black">
         <Link to={`/*`}>
           <img className="px-1 pt-1" src={apple} alt="Apple" />
         </Link>
@@ -49,13 +49,13 @@ export default function Product(props) {
             <p className="text-sm pl-2 text-gray-500">Product Name</p>
             <p className="text-sm pl-2 text-gray-900">
               ₹ Product Price{" "}
-              <span className="text-gray-400 line-through">₹29.99</span>
+              {!(quantity > 0) && <span className="text-gray-400 line-through">₹29.99</span>}
             </p>
             <div className="h-3 w-3 pl-2 pb-2">
-              <Rating value={4} readonly />
+              <Rating value={4} size="small" readonly />
             </div>
           </div>
-          <div className="flex items-center border border-gray-300 rounded-full mr-1">
+          <div className="flex items-center border border-gray-300 rounded-full mr-2">
             {quantity > 0 && (
               <>
                 <Button
