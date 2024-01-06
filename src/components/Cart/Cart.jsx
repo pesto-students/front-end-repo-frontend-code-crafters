@@ -12,14 +12,14 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         // Fetch logged-in user's data
-        const response = await axios.get('http://localhost:9001/api/currentuser');
+        const response = await axios.get('https://harvestlyy.onrender.com/api/currentuser');
         const loggedInUsers = response.data.loggedInUsers;
         
         if (loggedInUsers.length > 0) {
           userId = loggedInUsers[0].userId;
           
           // Fetch cart items based on the user ID
-          const Productresponse = await axios.get(`http://localhost:9001/api/app/cart/${userId}`);
+          const Productresponse = await axios.get(`https://harvestlyy.onrender.com/api/app/cart/${userId}`);
           const items = Productresponse.data;
           console.log('Items before mapping:', items);
 
@@ -46,7 +46,7 @@ const Cart = () => {
   const fetchProductDetails = async (productId) => {
     try {
       console.log(`Fetching product details for productId: ${productId}`);
-      const response = await axios.get(`http://localhost:9001/api/products/${productId}`);
+      const response = await axios.get(`https://harvestlyy.onrender.com/api/products/${productId}`);
       console.log('Product details:', response.data); // Log the fetched product details
       return response.data; // Assuming this contains product details
     } catch (error) {
@@ -57,7 +57,7 @@ const Cart = () => {
   const removeFromCart = async (productId) => {
     try {
       // Send a DELETE request to remove the product from the cart based on productId and userId
-      await axios.delete(`http://localhost:9001/api/app/cart/${userId}/${productId}/remove`);
+      await axios.delete(`https://harvestlyy.onrender.com/api/app/cart/${userId}/${productId}/remove`);
       // After successful removal, update the cartItems state to reflect the changes
       const updatedItems = cartItems.filter(item => item.productId !== productId);
       setCartItems(updatedItems);

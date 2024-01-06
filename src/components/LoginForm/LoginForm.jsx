@@ -36,7 +36,7 @@ const LoginForm = () => {
       localStorage.setItem('userId', userId);
   
       // Send user data including userId to the backend
-      const backendResponse = await fetch('http://localhost:9001/api/storeGoogleUserData', {
+      const backendResponse = await fetch('https://harvestlyy.onrender.com/api/storeGoogleUserData', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:9001/api/login', {
+      const response = await fetch('https://harvestlyy.onrender.com/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

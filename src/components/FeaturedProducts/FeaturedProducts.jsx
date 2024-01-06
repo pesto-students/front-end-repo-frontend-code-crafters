@@ -20,7 +20,7 @@ const [vegetablesData, setVegetablesData] = useState([]);
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:9001/api/products');
+      const response = await axios.get('https://harvestlyy.onrender.com/api/products');
       setVegetablesData(response.data.slice(0, 4));
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -38,7 +38,7 @@ useEffect(() => {
  
  const fetchCurrentUser = async () => {
   try {
-    const response = await axios.get('http://localhost:9001/api/currentuser');
+    const response = await axios.get('https://harvestlyy.onrender.com/api/currentuser');
     if (response.data.loggedInUsers.length > 0) {
       const fetchedUserId = response.data.loggedInUsers[0].userId;
       setUserId(fetchedUserId); // Set the userId in state
@@ -52,7 +52,7 @@ const [message, setMessage] = useState('');
 
 const addToCart = async (id) => {
   try {
-    const response = await axios.post('http://localhost:9001/api/cart/add', {
+    const response = await axios.post('https://harvestlyy.onrender.com/api/cart/add', {
       productId: id,
       quantity: 1,
       userId: userId, // Use the userId from state directly

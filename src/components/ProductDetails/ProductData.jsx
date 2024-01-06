@@ -17,7 +17,7 @@ const ProductData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/products/${id}`);
+        const response = await axios.get(`https://harvestlyy.onrender.com/api/products/${id}`);
         setProduct(response.data);
   
         const token = localStorage.getItem('token');
@@ -42,7 +42,7 @@ const ProductData = () => {
  
   const fetchCurrentUser = async () => {
     try {
-      const response = await axios.get('http://localhost:9001/api/currentuser');
+      const response = await axios.get('https://harvestlyy.onrender.com/api/currentuser');
       const loggedInUsers = response.data.loggedInUsers;
       if (loggedInUsers.length > 0) {
         const fetchedUserId = loggedInUsers[0].userId;
@@ -56,7 +56,7 @@ const ProductData = () => {
   };
   const fetchCurrentProduct = async () => {
     try { const uid = userId;
-      const response = await axios.get(`http://localhost:9001/api/cart/${uid}/${id}/quantity`);
+      const response = await axios.get(`https://harvestlyy.onrender.com/api/cart/${uid}/${id}/quantity`);
       //if (response.data.quantity.length > 0) {
         const fetchedUserProductQuantity = response.data.quantity;
         quantity = fetchedUserProductQuantity;
@@ -71,7 +71,7 @@ const ProductData = () => {
 
   const handlePlusClick = async () => {
     try {const uid = userId;
-      const response = await axios.put(`http://localhost:9001/api/app/cart/${uid}/${id}/quantity/add`);
+      const response = await axios.put(`https://harvestlyy.onrender.com/api/app/cart/${uid}/${id}/quantity/add`);
       // Update the quantity in the state upon successful API call
       setProductQuantity(response.data.newQuantity);
     } catch (error) {
@@ -81,7 +81,7 @@ const ProductData = () => {
 
   const handleSubClick = async () => {
     try {const uid = userId;
-      const response = await axios.put(`http://localhost:9001/api/app/cart/${uid}/${id}/quantity/sub`);
+      const response = await axios.put(`https://harvestlyy.onrender.com/api/app/cart/${uid}/${id}/quantity/sub`);
       // Update the quantity in the state upon successful API call
       setProductQuantity(response.data.newQuantity);
     } catch (error) {

@@ -10,7 +10,7 @@ const ProductImage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:9001/api/products/${id}`); // Fetch data for the specific product ID
+        const response = await axios.get(`https://harvestlyy.onrender.com/api/products/${id}`); // Fetch data for the specific product ID
         setProduct(response.data);
       } catch (error) {
         console.error('Error fetching product:', error);

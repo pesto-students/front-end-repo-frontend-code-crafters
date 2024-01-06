@@ -18,12 +18,12 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('http://localhost:9001/api/currentuser');
+      const response = await fetch('https://harvestlyy.onrender.com/api/currentuser');
       if (response.ok) {
         const { loggedInUsers } = await response.json();
         if (loggedInUsers.length > 0) {
           const userId = loggedInUsers[0].userId;
-          const logoutResponse = await fetch('http://localhost:9001/api/logout', {
+          const logoutResponse = await fetch('https://harvestlyy.onrender.com/api/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const Navbar = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://localhost:9001/api/products?search=${searchTerm}`);
+      const response = await fetch(`https://harvestlyy.onrender.com/api/products?search=${searchTerm}`);
       if (response.ok) {
         const products = await response.json();
         if (products.length > 0) {

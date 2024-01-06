@@ -66,7 +66,7 @@ const handleSignUp = async (e) => {
   e.preventDefault();
   const userId = generateUserId(); // Generate or fetch the user ID (you may use a function or library to generate unique IDs)
   try {
-    const response = await fetch('http://localhost:9001/api/signup', {
+    const response = await fetch('https://harvestlyy.onrender.com/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
