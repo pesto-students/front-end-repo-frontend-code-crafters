@@ -86,14 +86,14 @@ export default function Shop() {
 
   return (
     <>
-      <div className="flex items-center justify-between m-5">
+      <div className="flex items-center justify-between m-2">
         <CategoryFilter />
         <PriceFilter />
         <RatingFilter />
         <SortByFilter />
         <OutOfStockFilter />
       </div>
-      <div className="grid grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-4 gap-1 mb-2 mx-1">
         <Product />
         <Product />
         <Product />
@@ -102,7 +102,7 @@ export default function Shop() {
       </div>
 
       {/* PAGINATION */}
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-center gap-2">
         <Button
           variant="text"
           className="flex items-center gap-2 rounded-full"

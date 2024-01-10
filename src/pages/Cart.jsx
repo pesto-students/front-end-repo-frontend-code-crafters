@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
+
+// const [quantity, setQuantity] = useState(0);
+
 const cart = [
   {
     description: "200g cheese block",
@@ -46,6 +50,17 @@ const cart = [
 const totalPrice = cart.reduce((total, product) => {
   total + product.price * product.quantity, 0;
 });
+// const addQuantity = () => {
+//   setQuantity(quantity + 1);
+// };
+
+// const subtractQuantity = () => {
+//   if (quantity > 0) {
+//     setQuantity(quantity - 1);
+//   } else {
+//     setClick(!click);
+//   }
+// };
 
 export default function Cart() {
   return (
@@ -73,7 +88,7 @@ export default function Cart() {
                       Product
                     </th>
                     <th
-                      width="20%"
+                      width="15%"
                       className=" pl-2 text-xs font-medium uppercase text-gray-500 py-2 "
                     >
                       Unit price
@@ -85,12 +100,12 @@ export default function Cart() {
                       Quantity
                     </th>
                     <th
-                      width="20%"
-                      className=" pl-2 text-xs font-medium uppercase text-gray-500 py-2 "
+                      width="15%"
+                      className=" pl-4 text-xs font-medium uppercase text-gray-500 py-2 "
                     >
                       SubTotal
                     </th>
-                    <th width="10%" className="pl-2 py-2"></th>
+                    <th width="5%" className="pl-2 py-2"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -110,14 +125,35 @@ export default function Cart() {
                           <span className="pl-2 text-xs">{product.name}</span>
                         </td>
                         <td className="pl-2 text-xs">₹{product.price}</td>
-                        <td className="pl-2 text-xs">{product.quantity}</td>
-                        <td className="pl-2 text-xs">
+                        {/* <td className="pl-2 text-xs">{product.quantity}</td> */}
+                        <td className="">
+                          {
+                            <>
+                              <div className="flex items-center border border-gray-300 p-1 rounded-full w-32">
+                                <Button
+                                  className="flex items-center flex-grow justify-center rounded-full h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
+                                  // onClick={subtractQuantity}
+                                >
+                                  -
+                                </Button>
+                                <p className="px-3 text-sm">{product.quantity}</p>
+                                <Button
+                                  className="flex items-center flex-grow justify-center rounded-full outline-offset-2 h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
+                                  // onClick={addQuantity}
+                                >
+                                  +
+                                </Button>
+                              </div>
+                            </>
+                          }
+                        </td>
+                        <td className="pl-6 text-xs">
                           ₹{product.price * product.quantity}
                         </td>
                         <td className="pl-2 text-xs">
-                          {/* <Button className="text-gray-600 font-medium text-sm">
-                          x
-                        </Button> */}
+                          <Button className="text-gray-600 font-medium text-sm">
+                            x
+                          </Button>
                         </td>
                       </tr>
                     );
@@ -159,13 +195,13 @@ export default function Cart() {
                     </span>
                   </div>
                 </div>
-                  <Link to="#">
-                    <Button className="mt-5 ml-10 text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center">
-                      Proceed to Checkout
-                    </Button>
-                  </Link>
+                <Link to="/checkout" className="ml-10 mt-5">
+                  <Button className=" text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center">
+                    Proceed to Checkout
+                  </Button>
+                </Link>
               </div>
-              <Link to="#">
+              <Link to="/shop">
                 <Button className="text-gray-700 font-sm bg-gray-50 text-xs py-2 px-3 rounded-full text-center">
                   Return to Shop
                 </Button>
