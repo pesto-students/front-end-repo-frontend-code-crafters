@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { Chip } from "@material-tailwind/react";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
-import outOfStock from "../assets/wishlist/out-of-stock.png";
-import inStock from "../assets/wishlist/in-stock.png";
 
 const cart = [
   {

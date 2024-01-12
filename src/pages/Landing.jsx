@@ -81,7 +81,7 @@ function Landing() {
           <h2 className="text-black font-semibold text-3xl">
             Featured Products
           </h2>
-          <Link to="/*">
+          <Link to="/shop">
             <div className="flex items-center">
               <span className="text-secondary font-medium">View All</span>
               <img src={arrow} className="h-3 w-5 ml-1" />
