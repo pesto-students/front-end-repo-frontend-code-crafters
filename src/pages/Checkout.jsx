@@ -347,7 +347,6 @@ export default function Checkout() {
                     className="text-xs h-3"
                     name="paymentMethod"
                     value="upi"
-                    // style={{accentColor: "green !important"}}
                   />
                   <span className="ml-2 text-xs">UPI</span>
                 </label>
