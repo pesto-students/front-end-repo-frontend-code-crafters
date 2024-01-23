@@ -8,6 +8,10 @@ import Navbar from "../components/Navbar.jsx";
 import PageFooter from "../components/Footer.jsx";
 import Landing from "../pages/Landing.jsx";
 import Shop from "../pages/Shop.jsx";
+import Cart from "../pages/Cart.jsx";
+import Wishlist from "../pages/Wishlist.jsx";
+import Checkout from "../pages/Checkout.jsx";
+import ProductDetail from "../pages/ProductDetail.jsx";
 
 export default function App() {
   return (
@@ -21,6 +25,10 @@ export default function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="shop" element={<Shop />} />
+            <Route path="products/:id" element={<ProductDetail />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="checkout" element={<Checkout/>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

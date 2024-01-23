@@ -17,6 +17,42 @@ import snacks from "../assets/category/snacks.png";
 import farmer from "../assets/landing/farmer-1.png";
 import farmer2 from "../assets/landing/farmer-2.png";
 import check from "../assets/landing/check.png";
+
+const products = [
+  {
+      "description": "200g cheese block",
+      "id": 1,
+      "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
+      "name": "Cheese",
+      "price": 10,
+      "price_id": "price_1HuavSGuhXEITAut56IgndJf"
+  },
+  {
+      "description": "200ml milk bottle",
+      "id": 2,
+      "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
+      "name": "Milk",
+      "price": 5,
+      "price_id": "price_1HxVriGuhXEITAutt5KUKo2V"
+  },
+  {
+      "description": "1 piece of tomato",
+      "id": 3,
+      "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
+      "name": "Tomato",
+      "price": 2.75,
+      "price_id": "price_1HxW4YGuhXEITAutgcWugXH7"
+  },
+  {
+      "description": "500g pineapple",
+      "id": 4,
+      "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
+      "name": "Pineapple",
+      "price": 3.25,
+      "price_id": "price_1HxW59GuhXEITAutCwoYZoOJ"
+  }
+]
+
 function Landing() {
   return (
     <>
@@ -81,7 +117,7 @@ function Landing() {
           <h2 className="text-black font-semibold text-3xl">
             Featured Products
           </h2>
-          <Link to="/*">
+          <Link to="/shop">
             <div className="flex items-center">
               <span className="text-secondary font-medium">View All</span>
               <img src={arrow} className="h-3 w-5 ml-1" />
@@ -89,10 +125,11 @@ function Landing() {
           </Link>
         </div>
         <div className="flex justify-between items-center">
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+        {products.map((product) => {
+          return (
+            <Product key={product.id} details={product}></Product>
+          );
+        })}
         </div>
       </section>
 
