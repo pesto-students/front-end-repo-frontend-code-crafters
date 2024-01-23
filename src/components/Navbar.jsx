@@ -10,11 +10,16 @@ import cart from "../assets/shop/cart.png";
 import wishlist from "../assets/shop/wishlist.png";
 import divider from "../assets/shop/divider.png";
 import avatar from "../assets/shop/avatar.png";
+import { useSelector } from "react-redux";
+import { cartCountSelector } from "../app/reducers/cartSlice";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const cartCount = useSelector(cartCountSelector);
+
   const token = sessionStorage.getItem("token")
     ? sessionStorage.getItem("token")
     : null;
@@ -81,7 +86,7 @@ export default function Navbar() {
               <Link to="/cart">
               <div className="relative">
                 <img className="h-8 w-8 ml-2" src={cart} alt="cart icon" />
-              <p className="text-xs flex justify-center items-center absolute top-0 right-0 h-4 w-4 px-2 py-1 rounded-full bg-primary text-white">10</p>
+              <p className="text-xs flex justify-center items-center absolute top-0 right-0 h-4 w-4 px-2 py-1 rounded-full bg-primary text-white">{cartCount}</p>
               </div>
               </Link>
               <div className="relative inline-block text-left ml-10 mb-2">

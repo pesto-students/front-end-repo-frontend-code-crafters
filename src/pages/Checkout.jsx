@@ -353,7 +353,7 @@ export default function Checkout() {
                 <Link to="/success" className="pb-4 pt-2">
                   <Button
                     className=" text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
-                    onClick={handleSubmit}
+                    onClick={handleSubmit} type="submit"
                   >
                     Place Order
                   </Button>

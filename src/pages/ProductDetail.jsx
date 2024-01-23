@@ -7,7 +7,6 @@ import {
   Carousel,
   IconButton,
   Typography,
-  Rating,
   Tabs,
   TabsHeader,
   TabsBody,

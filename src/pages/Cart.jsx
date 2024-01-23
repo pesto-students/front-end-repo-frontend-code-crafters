@@ -2,80 +2,43 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
-
-// const [quantity, setQuantity] = useState(0);
-
-const cart = [
-  {
-    description: "200g cheese block",
-    id: 1,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-    name: "Cheese",
-    price: 10,
-    price_id: "price_1HuavSGuhXEITAut56IgndJf",
-    quantity: 3,
-  },
-  {
-    description: "1 piece of tomato",
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-    name: "Tomato",
-    price: 2.75,
-    price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-    quantity: 3,
-  },
-  {
-    description: "500g pineapple",
-    id: 4,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-    name: "Pineapple",
-    price: 3.25,
-    price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-    quantity: 2,
-  },
-  {
-    description: "200ml milk bottle",
-    id: 2,
-    image: apple,
-    name: "Apple",
-    price: 5,
-    price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-    quantity: 1,
-  },
-];
-
-const totalPrice = cart.reduce((total, product) => {
-  total + product.price * product.quantity, 0;
-});
-// const addQuantity = () => {
-//   setQuantity(quantity + 1);
-// };
-
-// const subtractQuantity = () => {
-//   if (quantity > 0) {
-//     setQuantity(quantity - 1);
-//   } else {
-//     setClick(!click);
-//   }
-// };
+import { cartValueSelector } from "../app/reducers/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  subtractProduct,
+  removeProduct,
+} from "../app/reducers/cartSlice.js";
 
 export default function Cart() {
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch()
+  console.log("Cart",cart)
+
+  const onProductAdd = (details) => {
+    dispatch(addProduct(details));
+  };
+  const onProductSubtract = (details) => {
+    dispatch(subtractProduct(details));
+  };
+  const onProductDelete = (details) => {
+    dispatch(removeProduct(details));
+  };
+
+  const totalPrice = useSelector(cartValueSelector);
   return (
     <>
       <div className="flex flex-col items-center justify-center mb-10">
         <h1 className="text-black font-medium text-2xl my-5">
           My Shopping Cart
         </h1>
-        {cart.length === 0 && (
+        {cart.cart.length === 0 && (
           <p className="text-black">
             You have not added any product to your cart yet
           </p>
         )}
         {/* CART TABLE */}
-        {cart.length > 0 && (
+        {cart.cart.length > 0 && (
           <div className="flex items-center">
             <div className="grid grid-cols-3 gap-4">
               <table className="col-span-2 border border-gray-100 text-gray-500 min-w-[600px] mx-15 rounded-md border-separate border-tools-table-outline border-1">
@@ -109,7 +72,7 @@ export default function Cart() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.map((product) => {
+                  {cart.cart.map((product) => {
                     return (
                       <tr
                         key={product.id}
@@ -132,14 +95,14 @@ export default function Cart() {
                               <div className="flex items-center border border-gray-300 p-1 rounded-full w-32">
                                 <Button
                                   className="flex items-center flex-grow justify-center rounded-full h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
-                                  // onClick={subtractQuantity}
+                                  onClick={() => onProductSubtract(product)}
                                 >
                                   -
                                 </Button>
                                 <p className="px-3 text-sm">{product.quantity}</p>
                                 <Button
                                   className="flex items-center flex-grow justify-center rounded-full outline-offset-2 h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
-                                  // onClick={addQuantity}
+                                  onClick={() => onProductAdd(product)}
                                 >
                                   +
                                 </Button>
@@ -151,7 +114,7 @@ export default function Cart() {
                           ₹{product.price * product.quantity}
                         </td>
                         <td className="pl-2 text-xs">
-                          <Button className="text-gray-600 font-medium text-sm">
+                          <Button className="text-gray-600 font-medium text-sm" onClick={()=> onProductDelete(product)}>
                             x
                           </Button>
                         </td>
