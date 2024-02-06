@@ -1,7 +1,9 @@
 import React from "react";
 import apple from "../assets/products/apple.png";
 import Product from "../components/Product";
-import { Link } from "react-router-dom";
+import useFetch from "../utils/useFetch";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   Chip,
   Carousel,
@@ -13,8 +15,15 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  subtractProduct,
+  removeProduct,
+} from "../app/reducers/cartSlice.js";
 
 import Button from "../components/Button";
+import WishlistButton from "../components/WishlistButton.jsx";
 
 const data = [
   {
@@ -32,15 +41,92 @@ const data = [
   },
 ];
 
-function ProductDetail() {
+function ProductDetail(props) {
+  // const [product, setProduct] = useState({});
+  // const {details} = props
+  // const { get } = useFetch("https://react-tutorial-demo.firebaseio.com/");
+  // const params = useParams();
+  // console.log("params", params);
+  // useEffect(() => {
+  //   get(`productinfo/id${params.id}.json`)
+  //     .then((data) => {
+  //       setProduct(data);
+  //     })
+  //     .catch((error) => console.log("Could not load product details", error));
+  // }, []);
+  // console.log("Product",product);
+
+  const cart = useSelector((state) => state.cart.cart);
+  console.log("cart", cart);
+  const dispatch = useDispatch();
+
+  const onProductAdd = (details) => {
+    dispatch(addProduct(details));
+  };
+  const onProductSubtract = (details) => {
+    dispatch(subtractProduct(details));
+  };
+  const onProductDelete = (details) => {
+    dispatch(removeProduct(details));
+  };
+
+  const { id } = useParams();
+
+  const products = [
+    {
+      description: "200g cheese block",
+      id: 1,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
+      name: "Cheese",
+      price: 10,
+      stockStatus: 1,
+      price_id: "price_1HuavSGuhXEITAut56IgndJf",
+      isWishlist : false
+    },
+    {
+      description: "200ml milk bottle",
+      id: 2,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
+      name: "Milk",
+      price: 5,
+      stockStatus: 1,
+      price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
+      isWishlist : false
+    },
+    {
+      description: "1 piece of tomato",
+      id: 3,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
+      name: "Tomato",
+      price: 2.75,
+      stockStatus: 1,
+      price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
+      isWishlist : false
+    },
+    {
+      description: "500g pineapple",
+      id: 4,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
+      name: "Pineapple",
+      price: 3.25,
+      stockStatus: 1,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
+      isWishlist : false
+    },
+  ];
+
+  const product = products.filter((val) => val.id == id);
   const [activeTab, setActiveTab] = React.useState("Description");
-  console.log(activeTab);
   return (
     <>
       <div className="flex flex-col justify-center items-center">
         <div className="flex justify-center items-start mt-5">
           <Carousel
-            className="!w-72 !h-72 rounded-lg border border-gray-300"
+            className="rounded-lg border border-gray-300 !flex !items-center !justify-center"
             prevArrow={({ handlePrev }) => (
               <IconButton
                 variant="text"
@@ -103,23 +189,12 @@ function ProductDetail() {
               </div>
             )}
           >
-            {/* <img
-            src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-            alt="image 1"
-            className=""
-          />
-          <img
-            src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-            alt="image 2"
-            className=""
-          /> */}
-            <img src={apple} alt="fruit" className="" />
-            <img src={apple} alt="fruit" />
+            <img src={product[0]?.image} alt="fruit" />
           </Carousel>
           <div className="flex flex-col items-start ml-5 h-full">
             <div className="flex items-center mb-2">
               <h2 className="text-black font-semibold text-3xl mr-2">
-                Product Name
+                {product[0]?.name}
               </h2>
               <Chip
                 className="bg-green-chip w-16 font-light capitalize text-primary justify-center"
@@ -150,7 +225,9 @@ function ProductDetail() {
               <span className="text-lg text-gray-400 line-through mr-1">
                 ₹29.99
               </span>
-              <h3 className="text-lg font-medium text-primary mr-2">₹24.99</h3>
+              <h3 className="text-lg font-medium text-primary mr-2">
+                ₹{product[0]?.price}
+              </h3>
               <Chip
                 className="capitalize font-light bg-red-chip text-red-error justify-center w-16 rounded-full"
                 variant="filled"
@@ -159,28 +236,25 @@ function ProductDetail() {
             </div>
             {/* <hr className=" w-full bg-gray-100 border"></hr> */}
             <p className="text-xs text-gray-500 max-w-[300px]">
-              Class aptent taciti sociosqu ad litora torquent per conubia
-              nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel
-              consequat nec, ultrices et ipsum. Nulla varius magna a consequat
-              pulvinar.
+              {product[0]?.description}
             </p>
             <div className="flex border-t-2 border-b-2 border-gray-100 mt-2 py-2">
               <div className="flex items-center border border-gray-300 p-1 rounded-full w-30 text-black">
                 <Button
                   className="flex items-center flex-grow justify-center rounded-full h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
-                  // onClick={subtractQuantity}
+                  onClick={() => onProductSubtract(product[0])}
                 >
                   -
                 </Button>
-                <p className="px-3 text-sm">1</p>
+                <p className="px-3 text-sm">{cart[0]?.quantity || 0}</p>
                 <Button
                   className="flex items-center flex-grow justify-center rounded-full outline-offset-2 h-10 w-10 text-xl bg-gray-100 hover:bg-gray-300"
-                  // onClick={addQuantity}
+                  onClick={() => onProductAdd(product[0])}
                 >
                   +
                 </Button>
               </div>
-              <button
+              {/* <button
                 className="ml-5"
                 onClick={() => {
                   alert("Added product to fav");
@@ -208,7 +282,8 @@ function ProductDetail() {
                     strokeWidth="1.5"
                   />
                 </svg>
-              </button>
+              </button> */}
+              <WishlistButton className="absolute top-0 right-0" />
             </div>
           </div>
         </div>
@@ -241,7 +316,10 @@ function ProductDetail() {
                   // <TabPanel key={value} value={value}>
                   //   {desc}
                   // </TabPanel>
-                  <div key={value} className="flex justify-center max-w-3xl border-b border-gray-200">
+                  <div
+                    key={value}
+                    className="flex justify-center max-w-3xl border-b border-gray-200"
+                  >
                     <span className="text-black text-sm my-2">{desc}</span>
                   </div>
                 ))}

@@ -1,66 +1,85 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Chip } from "@material-tailwind/react";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addProduct,
+  subtractProduct,
+  removeProduct,
+} from "../app/reducers/cartSlice.js";
+import { removeProductWishlist } from "../app/reducers/wishlistSlice.js";
+// const cart = [
+//   {
+//     description: "200g cheese block",
+//     id: 1,
+//     image:
+//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
+//     name: "Cheese",
+//     price: 10,
+//     price_id: "price_1HuavSGuhXEITAut56IgndJf",
+//     stockStatus: 1,
+//   },
+//   {
+//     description: "1 piece of tomato",
+//     id: 3,
+//     image:
+//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
+//     name: "Tomato",
+//     price: 2.75,
+//     price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
+//     stockStatus: 1,
+//   },
+//   {
+//     description: "500g pineapple",
+//     id: 4,
+//     image:
+//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
+//     name: "Pineapple",
+//     price: 3.25,
+//     price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
+//     stockStatus: 1,
+//   },
+//   {
+//     description: "200ml milk bottle",
+//     id: 2,
+//     image: apple,
+//     name: "Apple",
+//     price: 5,
+//     price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
+//     stockStatus: 0,
+//   },
+// ];
 
-const cart = [
-  {
-    description: "200g cheese block",
-    id: 1,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-    name: "Cheese",
-    price: 10,
-    price_id: "price_1HuavSGuhXEITAut56IgndJf",
-    stockStatus: 1,
-  },
-  {
-    description: "1 piece of tomato",
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-    name: "Tomato",
-    price: 2.75,
-    price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-    stockStatus: 1,
-  },
-  {
-    description: "500g pineapple",
-    id: 4,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-    name: "Pineapple",
-    price: 3.25,
-    price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-    stockStatus: 1,
-  },
-  {
-    description: "200ml milk bottle",
-    id: 2,
-    image: apple,
-    name: "Apple",
-    price: 5,
-    price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-    stockStatus: 0,
-  },
-];
-
-const totalPrice = cart.reduce((total, product) => {
-  total + product.price * product.quantity, 0;
-});
+// const totalPrice = cart.reduce((total, product) => {
+//   total + product.price * product.quantity, 0;
+// });
 
 export default function Wishlist() {
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
+  const [isAdded, setIsAdded] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onProductAdd = (details) => {
+    dispatch(addProduct(details));
+  };
+
+  const onProductDelete = (details) => {
+    dispatch(removeProductWishlist(details));
+  };
   return (
     <>
       <div className="flex flex-col items-center justify-center mb-10">
         <h1 className="text-black font-medium text-2xl my-5">My Wishlist</h1>
-        {/* {cart.length === 0 && (
-            <p className="text-black">
-              You have not added any product to your cart yet
-            </p>
-          )} */}
+        {wishlist.length === 0 && (
+          <p className="text-black">
+            You have not added any product to your wishlist yet
+          </p>
+        )}
         {/* WISHLIST */}
-        {cart.length > 0 && (
+        {wishlist.length > 0 && (
           <div className="flex items-center justify-center">
             <div className="grid">
               <table className="col-span-2 border border-gray-100 text-gray-500 min-w-[800px] mx-15 rounded-md border-separate border-tools-table-outline border-1">
@@ -94,7 +113,7 @@ export default function Wishlist() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.map((product) => {
+                  {wishlist.map((product) => {
                     return (
                       <tr
                         key={product.id}
@@ -129,13 +148,23 @@ export default function Wishlist() {
                           </td>
                         }
 
-                        <td className="pl-2 text-xs">
-                          <Button className="text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center">
-                            Add to Cart
+                        <td key={product.id} className="pl-2 text-xs">
+                          <Button
+                            className="text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
+                            onClick={() => {
+                              onProductAdd(product);
+                              setIsAdded(true);
+                            }}
+                            disabled={isAdded}
+                          >
+                            {!isAdded ? "Add to Cart" : "Added to cart!"}
                           </Button>
                         </td>
                         <td className="pl-2 text-xs">
-                          <Button className="text-gray-600 font-medium text-sm">
+                          <Button
+                            className="text-gray-600 font-medium text-sm"
+                            onClick={() => onProductDelete(product)}
+                          >
                             x
                           </Button>
                         </td>

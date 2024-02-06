@@ -29,10 +29,7 @@ const cartSlice = createSlice({
       if (existingProduct.quantity > 1) {
         existingProduct.quantity--;
       } else if (existingProduct.quantity === 1) {
-        // console.log("State",state);
-        console.log("existing product ", existingProduct.quantity);
         const index = state.cart.findIndex((item) => item === existingProduct);
-        console.log(index);
         state.cart.splice(index, 1);
       }
     },

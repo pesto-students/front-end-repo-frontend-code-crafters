@@ -92,7 +92,9 @@ export default function Shop() {
         "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
         "name": "Cheese",
         "price": 10,
-        "price_id": "price_1HuavSGuhXEITAut56IgndJf"
+        "stockStatus": 1,
+        "price_id": "price_1HuavSGuhXEITAut56IgndJf",
+        "isWishlist" : false
     },
     {
         "description": "200ml milk bottle",
@@ -100,7 +102,9 @@ export default function Shop() {
         "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
         "name": "Milk",
         "price": 5,
-        "price_id": "price_1HxVriGuhXEITAutt5KUKo2V"
+        "stockStatus": 1,
+        "price_id": "price_1HxVriGuhXEITAutt5KUKo2V",
+        "isWishlist" : false
     },
     {
         "description": "1 piece of tomato",
@@ -108,7 +112,9 @@ export default function Shop() {
         "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
         "name": "Tomato",
         "price": 2.75,
-        "price_id": "price_1HxW4YGuhXEITAutgcWugXH7"
+        "stockStatus": 1,
+        "price_id": "price_1HxW4YGuhXEITAutgcWugXH7",
+        "isWishlist" : false
     },
     {
         "description": "500g pineapple",
@@ -116,7 +122,9 @@ export default function Shop() {
         "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
         "name": "Pineapple",
         "price": 3.25,
-        "price_id": "price_1HxW59GuhXEITAutCwoYZoOJ"
+        "stockStatus": 1,
+        "price_id": "price_1HxW59GuhXEITAutCwoYZoOJ",
+        "isWishlist" : false
     }
 ]
   return (

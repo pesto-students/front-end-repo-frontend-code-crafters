@@ -9,21 +9,25 @@ import {
 
 import Button from "./Button.jsx";
 import apple from "../assets/products/apple.svg";
+import WishlistButton from "./WishlistButton.jsx";
+import { addProductWishlist } from "../app/reducers/wishlistSlice.js";
 
 export default function Product(props) {
   // const [quantity, setQuantity] = useState(0);
   const { details } = props;
-
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log("Product page",cart.length === 0);
+  const wishlist = useSelector((state) => state.wishlist.wishlist);
+
   let qty;
   if (cart.length === 0) {
     qty = 0;
   } else {
-    const productFromCart = cart.find((product) => product.id === details.id);
-    qty = productFromCart ? productFromCart.quantity : 0;
+    const productFromCart = cart?.find(
+      (product) => product?.id === details?.id
+    );
+    qty = productFromCart ? productFromCart?.quantity : 0;
   }
 
   const onProductAdd = (details) => {
@@ -35,18 +39,41 @@ export default function Product(props) {
   const onProductDelete = () => {
     dispatch(removeProduct(details));
   };
+  const onProductAddWishlist = (details) => {
+    dispatch(addProductWishlist(details));
+  };
+
+  const handleClick = (ID) => {
+    console.log("inside function handleClick = ", ID);
+  };
 
   return (
     <>
-      <div className="mt-1 h-80 w-64 border border-gray-100 rounded-lg text-black">
-        <Link to={`/products/${details.id}`}>
-          <img className="px-1 pt-1" src={details.image} alt="Apple" />
-        </Link>
-        <div className="flex justify-between items-center">
+      <div className="h-80 w-64 border border-gray-100 rounded-lg text-black">
+        <div className="flex items-center justify-center">
+          <div>
+            <Link to={`/products/${details?.id}`}>
+              <img
+                className="px-1 pt-1"
+                src={details?.image}
+                onClick={() => handleClick(details?.id)}
+                alt="Apple"
+              />
+            </Link>
+          </div>
+          <div className="flex flex-col items-start justify-center">
+            <WishlistButton
+              className="absolute top-0 right-0"
+              details={details}
+              isWishlist={details?.isWishlist}
+            />
+          </div>
+        </div>
+        <div className="flex justify-between items-center mt-2">
           <div className="pl-2">
-            <p className="text-sm  text-gray-500">{details.name}</p>
+            <p className="text-sm  text-gray-500">{details?.name}</p>
             <p className="text-sm  text-gray-900">
-              ₹{details.price}{" "}
+              ₹{details?.price}{" "}
               {!(qty > 0) && (
                 <span className="text-gray-400 line-through">₹29.99</span>
               )}
@@ -71,7 +98,7 @@ export default function Product(props) {
                 </a> */}
             </div>
           </div>
-          <div className="flex items-center border border-gray-300 rounded-full mr-2">
+          <div className="flex items-center border border-gray-300 rounded-full mr-2 p-1">
             {qty > 0 && (
               <>
                 <Button

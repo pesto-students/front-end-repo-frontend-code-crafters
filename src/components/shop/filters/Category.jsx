@@ -7,6 +7,7 @@ export function CategoryFilter() {
         <Option className="text-black">Fruits</Option>
         <Option className="text-black">Vegetables</Option>
         <Option className="text-black">Snacks</Option>
+        <Option className="text-black">Beverages</Option>
       </Select>
     </div>
     );

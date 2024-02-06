@@ -143,7 +143,7 @@ function Landing() {
             <Category img={vegetables} text="Vegetables" />
             <Category img={snacks} text="Snacks" />
             <Category img={fruits} text="Fruits" />
-            <Category img={drinks} text="Soft Drinks" />
+            <Category img={drinks} text="Beverages" />
           </div>
         </div>
       </section>
