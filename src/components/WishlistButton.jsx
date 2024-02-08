@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 function WishlistButton(props) {
   const [isClicked, setIsClicked] = useState(false);
-  const { details, isWishlist } = props;
+  const { details, isWishlist, classNames } = props;
   const dispatch = useDispatch();
 
   const onProductAddWishlist = (details) => {
@@ -22,16 +22,15 @@ function WishlistButton(props) {
   const handleClick = () => {
     if (!isClicked) {
       onProductAddWishlist(details);
-      // setIsClicked(!isClicked);
       console.log("added product");
     } else {
       onProductSubtractWishlist(details);
-      // setIsClicked(!isClicked);
       console.log("removed product");
     }
   };
+  console.log("details", details);
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick} className={classNames}>
       <svg
         width="53"
         height="52"

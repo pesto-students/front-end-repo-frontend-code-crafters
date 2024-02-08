@@ -150,14 +150,12 @@ export default function Wishlist() {
 
                         <td key={product.id} className="pl-2 text-xs">
                           <Button
-                            className="text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
+                            className="text-white bg-primary font-sm  text-xs py-2 px-3 rounded-full text-center"
                             onClick={() => {
                               onProductAdd(product);
                               setIsAdded(true);
                             }}
-                            disabled={isAdded}
-                          >
-                            {!isAdded ? "Add to Cart" : "Added to cart!"}
+                          > Add to Cart
                           </Button>
                         </td>
                         <td className="pl-2 text-xs">

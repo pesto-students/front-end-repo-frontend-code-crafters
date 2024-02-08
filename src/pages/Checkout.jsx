@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
 import axios from "axios";
-import { cartValueSelector, cartCountSelector } from "../app/reducers/cartSlice";
+import {
+  cartValueSelector,
+  cartCountSelector,
+} from "../app/reducers/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 // const cart = [
@@ -92,7 +95,7 @@ const states = [
 ];
 
 export default function Checkout() {
-  const cart = useSelector(state => state.cart.cart);
+  const cart = useSelector((state) => state.cart.cart);
 
   const totalPrice = useSelector(cartValueSelector);
   // const [data, setData] = useState({ fname: "", lname: "", street: "", pincode: "", phoneNumber: "" });
@@ -101,9 +104,46 @@ export default function Checkout() {
   // };
   // useEffect(() => {
   // });
-  const handleSubmit = () => {
+
+  // const handleSubmit = () => {
     console.log("submitted");
-  };
+    const initPayment = (data) => {
+      const options = {
+        key: import.meta.env.RAZORPAY_KEY_ID,
+        amount: totalPrice,
+        currency: "INR",
+        // name: book.name,
+        description: "Test Transaction",
+        // image: book.img,
+        order_id: data.id,
+        handler: async (response) => {
+          try {
+            const verifyUrl = "http://localhost:4000/payment/verify";
+            const { data } = await axios.post(verifyUrl, response);
+            console.log("Verify",data);
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open().then(redirect);
+    };
+
+    const handlePayment = async () => {
+      try {
+        const orderUrl = "http://localhost:4000/payment/order";
+        const { data } = await axios.post(orderUrl, { amount: totalPrice });
+        console.log("Data-",data.data);
+        initPayment(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  // };
   return (
     <>
       {cart.length > 0 ? (
@@ -355,28 +395,30 @@ export default function Checkout() {
                   />
                   <span className="ml-2 text-xs">UPI</span>
                 </label>
-                <Link to="/success" className="pb-4 pt-2">
+                {/* <Link to="/success" className="pb-4 pt-2"> */}
                   <Button
                     className=" text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
-                    onClick={handleSubmit} type="submit"
+                    onClick={handlePayment}
+                    type="submit"
                   >
                     Place Order
                   </Button>
-                </Link>
+                {/* </Link> */}
               </div>
             </div>
           </div>
         </div>
-      ) : <div className="flex flex-col items-center justify-center mb-10">
-      <h1 className="text-black font-medium text-2xl my-5">
-        Cart's empty!
-      </h1>
-    
-        <p className="text-black">
-          Why don't you add some products so that we can "check-you out"?
-        </p>
+      ) : (
+        <div className="flex flex-col items-center justify-center mb-10">
+          <h1 className="text-black font-medium text-2xl my-5">
+            Cart's empty!
+          </h1>
+
+          <p className="text-black">
+            Why don't you add some products so that we can "check-you out"?
+          </p>
         </div>
-      }
+      )}
     </>
   );
 }

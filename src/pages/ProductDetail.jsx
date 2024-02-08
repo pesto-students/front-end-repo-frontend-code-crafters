@@ -283,7 +283,7 @@ function ProductDetail(props) {
                   />
                 </svg>
               </button> */}
-              <WishlistButton className="absolute top-0 right-0" />
+              <WishlistButton className="ml-5" />
             </div>
           </div>
         </div>

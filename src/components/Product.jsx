@@ -61,9 +61,9 @@ export default function Product(props) {
               />
             </Link>
           </div>
-          <div className="flex flex-col items-start justify-center">
+          <div className="flex flex-col items-center justify-center">
             <WishlistButton
-              className="absolute top-0 right-0"
+              classNames="ml-5"
               details={details}
               isWishlist={details?.isWishlist}
             />
