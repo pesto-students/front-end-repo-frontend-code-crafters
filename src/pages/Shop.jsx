@@ -87,61 +87,79 @@ export default function Shop() {
   // Sample API to test Redux
   const products = [
     {
-        "description": "200g cheese block",
-        "id": 1,
-        "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-        "name": "Cheese",
-        "price": 10,
-        "stockStatus": 1,
-        "price_id": "price_1HuavSGuhXEITAut56IgndJf",
-        "isWishlist" : false
+      description: "200g cheese block",
+      id: 1,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
+      name: "Cheese",
+      price: 10,
+      stockStatus: 1,
+      price_id: "price_1HuavSGuhXEITAut56IgndJf",
+      isWishlist: false,
+      category: "dairy",
     },
     {
-        "description": "200ml milk bottle",
-        "id": 2,
-        "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
-        "name": "Milk",
-        "price": 5,
-        "stockStatus": 1,
-        "price_id": "price_1HxVriGuhXEITAutt5KUKo2V",
-        "isWishlist" : false
+      description: "200ml milk bottle",
+      id: 2,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
+      name: "Milk",
+      price: 5,
+      stockStatus: 1,
+      price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
+      isWishlist: false,
+      category: "dairy",
     },
     {
-        "description": "1 piece of tomato",
-        "id": 3,
-        "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-        "name": "Tomato",
-        "price": 2.75,
-        "stockStatus": 1,
-        "price_id": "price_1HxW4YGuhXEITAutgcWugXH7",
-        "isWishlist" : false
+      description: "1 piece of tomato",
+      id: 3,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
+      name: "Tomato",
+      price: 2.75,
+      stockStatus: 1,
+      price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
+      isWishlist: false,
+      category: "vegetables",
     },
     {
-        "description": "500g pineapple",
-        "id": 4,
-        "image": "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-        "name": "Pineapple",
-        "price": 3.25,
-        "stockStatus": 1,
-        "price_id": "price_1HxW59GuhXEITAutCwoYZoOJ",
-        "isWishlist" : false
-    }
-]
+      description: "500g pineapple",
+      id: 4,
+      image:
+        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
+      name: "Pineapple",
+      price: 3.25,
+      stockStatus: 1,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
+      isWishlist: false,
+      category: "fruits",
+    },
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category.toLowerCase());
+  };
+
+  const filteredProducts = products.filter(
+    (product) =>
+      product.category === selectedCategory || selectedCategory === ""
+  );
+
   return (
     <>
       <div className="flex items-center justify-between m-2">
-        <CategoryFilter />
+        <CategoryFilter onChange={handleCategoryChange(category)} />
         <PriceFilter />
         <RatingFilter />
         <SortByFilter />
         <OutOfStockFilter />
       </div>
-      
+
       <div className="grid grid-cols-4 gap-1 mb-2 mx-1">
-      {products.map((product) => {
-          return (
-            <Product key={product.id} details={product}></Product>
-          );
+        {filteredProducts.map((product) => {
+          return <Product key={product.id} details={product}></Product>;
         })}
       </div>
 
