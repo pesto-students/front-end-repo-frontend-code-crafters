@@ -172,7 +172,7 @@ function ProductDetail(props) {
               <p className="text-md font-bold text-gray-900">4.9</p>
             </div>
             <div className="flex my-1">
-              {product[0].discount > 0 && (
+              {product[0]?.discount > 0 && (
                 <span className="text-lg text-gray-400 line-through mr-1">
                   ₹{product[0]?.price}
                 </span>
@@ -180,7 +180,7 @@ function ProductDetail(props) {
               <h3 className="text-lg font-medium text-primary mr-2">
                 ₹{(product[0]?.price * (100 - product[0]?.discount)) / 100}
               </h3>
-              {product[0].discount > 0 && (
+              {product[0]?.discount > 0 && (
                 <Chip
                   className="capitalize font-light bg-red-chip text-red-error justify-center w-16 rounded-full"
                   variant="filled"

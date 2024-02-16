@@ -35,8 +35,6 @@ export default function Navbar() {
     dispatch(logout());
     navigate("/login");
   };
-  const paths = ["/shop", "/products", "/products/:id", "/wishlist"];
-
   useEffect(() => {
     if (path === "/shop") {
       setIsSearchbarAllowed(true);
@@ -52,6 +50,11 @@ export default function Navbar() {
       setIsSearchbarAllowed(false);
       setIsWishlistAllowed(true);
       setIsCartAllowed(false);
+      setIsAvatarAllowed(true);
+    } else if (path.includes("/products/")) {
+      setIsSearchbarAllowed(false);
+      setIsWishlistAllowed(true);
+      setIsCartAllowed(true);
       setIsAvatarAllowed(true);
     } else {
       setIsSearchbarAllowed(false);
