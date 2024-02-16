@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import apple from "../assets/products/apple.png";
+// import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
 import { cartValueSelector } from "../app/reducers/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,9 +11,8 @@ import {
 } from "../app/reducers/cartSlice.js";
 
 export default function Cart() {
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart.cart);
   const dispatch = useDispatch()
-  console.log("Cart",cart)
 
   const onProductAdd = (details) => {
     dispatch(addProduct(details));
@@ -32,13 +31,13 @@ export default function Cart() {
         <h1 className="text-black font-medium text-2xl my-5">
           My Shopping Cart
         </h1>
-        {cart.cart.length === 0 && (
+        {cart.length === 0 && (
           <p className="text-black">
             You have not added any product to your cart yet
           </p>
         )}
         {/* CART TABLE */}
-        {cart.cart.length > 0 && (
+        {cart.length > 0 && (
           <div className="flex items-center">
             <div className="grid grid-cols-3 gap-4">
               <table className="col-span-2 border border-gray-100 text-gray-500 min-w-[600px] mx-15 rounded-md border-separate border-tools-table-outline border-1">
@@ -72,20 +71,23 @@ export default function Cart() {
                   </tr>
                 </thead>
                 <tbody>
-                  {cart.cart.map((product) => {
+                  {cart.map((product) => {
                     return (
                       <tr
                         key={product.id}
                         className="text-black border-gray-100 border-b-4"
                       >
-                        <td className="pl-4 py-4 flex items-center">
+                        <td className="pl-4">
+                          <div className=" flex items-center content-center">
+
                           <img
                             src={product.image}
                             width="50"
                             height="50"
                             alt=""
-                          />
+                            />
                           <span className="pl-2 text-xs">{product.name}</span>
+                            </div>
                         </td>
                         <td className="pl-2 text-xs">₹{product.price}</td>
                         {/* <td className="pl-2 text-xs">{product.quantity}</td> */}

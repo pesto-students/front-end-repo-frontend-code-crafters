@@ -1,54 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
 import axios from "axios";
+import {
+  cartValueSelector,
+  cartCountSelector,
+} from "../app/reducers/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-const cart = [
-  {
-    description: "200g cheese block",
-    id: 1,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-    name: "Cheese",
-    price: 10,
-    price_id: "price_1HuavSGuhXEITAut56IgndJf",
-    quantity: 3,
-  },
-  {
-    description: "1 piece of tomato",
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-    name: "Tomato",
-    price: 2.75,
-    price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-    quantity: 3,
-  },
-  {
-    description: "500g pineapple",
-    id: 4,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-    name: "Pineapple",
-    price: 3.25,
-    price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-    quantity: 2,
-  },
-  {
-    description: "200ml milk bottle",
-    id: 2,
-    image: apple,
-    name: "Apple",
-    price: 5,
-    price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-    quantity: 1,
-  },
-];
-const totalPrice = cart.reduce((total, product) => {
-  total + product.price * product.quantity, 0;
-});
-console.log(totalPrice);
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 const states = [
   { value: "IN-AN", label: "Andaman and Nicobar Islands" },
   { value: "IN-AP", label: "Andhra Pradesh" },
@@ -90,18 +52,50 @@ const states = [
 ];
 
 export default function Checkout() {
-  // const [data, setData] = useState({ fname: "", lname: "", street: "", pincode: "", phoneNumber: "" });
-  // const handleChange = ({ currentTarget: input }) => {
-  //   setData({ ...data, [input.name]: input.value });
+  const cart = useSelector((state) => state.cart.cart);
+  const navigate = useNavigate();
+
+  const totalPrice = useSelector(cartValueSelector);
+
+    const initPayment = (data) => {
+      const options = {
+        key: import.meta.env.RAZORPAY_KEY_ID,
+        amount: totalPrice,
+        currency: "INR",
+        // name: book.name,
+        description: "Test Transaction",
+        // image: book.img,
+        order_id: data.id,
+        handler: async (response) => {
+          try {
+            const verifyUrl = `${VITE_API_URL}/payment/verify`;
+            const { data } = await axios.post(verifyUrl, response);
+            console.log("Verify",data);
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        theme: {
+          color: "#0962AE",
+        },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    };
+
+    const handlePayment = async () => {
+      try {
+        const orderUrl = `${VITE_API_URL}/payment/order`;
+        const { data } = await axios.post(orderUrl, { amount: totalPrice });
+        initPayment(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
   // };
-  // useEffect(() => {
-  // });
-  const handleSubmit = () => {
-    console.log("submitted");
-  };
   return (
     <>
-      {cart.length > 0 && (
+      {cart.length > 0 ? (
         <div className="grid grid-cols-3 gap-2 my-2 mx-2">
           <div className="col-span-2 p-4">
             <h4 className="text-black font-medium text-md my-1">
@@ -319,7 +313,7 @@ export default function Checkout() {
                   <strong>₹{totalPrice || 100}</strong>
                 </span>
               </div>
-              <h3 className="text-gray-900 text-sm font-medium py-2">
+              {/* <h3 className="text-gray-900 text-sm font-medium py-2">
                 Payment Method
               </h3>
               <div className="flex flex-col gap-2">
@@ -349,21 +343,31 @@ export default function Checkout() {
                     value="upi"
                   />
                   <span className="ml-2 text-xs">UPI</span>
-                </label>
-                <Link to="/success" className="pb-4 pt-2">
+                </label> */}
+                {/* <Link to="/success" className="pb-4 pt-2"> */}
                   <Button
-                    className=" text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
-                    onClick={handleSubmit} type="submit"
+                    className=" text-white font-sm bg-primary text-xs py-2 px-3 mb-2 rounded-full text-center"
+                    onClick={handlePayment}
+                    type="submit"
                   >
                     Place Order
                   </Button>
-                </Link>
-              </div>
+                {/* </Link> */}
+              {/* </div> */}
             </div>
           </div>
         </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center mb-10">
+          <h1 className="text-black font-medium text-2xl my-5">
+            Cart's empty!
+          </h1>
+
+          <p className="text-black">
+            Why don't you add some products so that we can "check-you out"?
+          </p>
+        </div>
       )}
-      {/* </div> */}
     </>
   );
 }

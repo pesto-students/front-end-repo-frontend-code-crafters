@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-const Login = () => {
+const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,9 +20,8 @@ const Login = () => {
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
     let cookieValue = Cookies.get('token');
-    console.log(cookieValue);
     sessionStorage.setItem("token", cookieValue);
-    dispatch(loginSuccess(true)).then(() => navigate("/home"))
+    dispatch(loginSuccess(true)).then(() => navigate("/shop"))
   };
 
   const handleChange = ({ currentTarget: input }) => {
@@ -33,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     try {
       dispatch(loginStart());
-      const url = `${VITE_API_URL}/user/login`;
+      const url = `${VITE_API_URL}/login`;
       const res = await fetch(url, {
         method: "POST",
         headers: {
@@ -44,8 +43,7 @@ const Login = () => {
       });
       const token = await res.json();
       sessionStorage.setItem("token", token.data);
-      dispatch(loginSuccess(token));
-      navigate("/home");
+      dispatch(loginSuccess(token)).then(() => navigate("/shop"));
     } catch (error) {
       if (
         error.response &&
