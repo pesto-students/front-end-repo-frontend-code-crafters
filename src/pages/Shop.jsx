@@ -7,6 +7,7 @@ import { PriceFilter } from "../components/shop/filters/Price";
 import { RatingFilter } from "../components/shop/filters/Rating";
 import { SortByFilter } from "../components/shop/filters/Sort";
 import { OutOfStockFilter } from "../components/shop/filters/OutOfStock";
+import { ClearButton } from "../components/shop/filters/Clear"
 import { useSelector } from "react-redux";
 
 export default function Shop() {
@@ -33,10 +34,11 @@ export default function Shop() {
 
   const masterProductList = useSelector((state) => state.products.products);
   const [products, setProducts] = useState([]);
+  const [clear, setClear] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
-  // const [selectedPrice, setSelectedPrice] = useState("");
-  // const [selectedRating, setSelectedRating] = useState("");
-  // const [selectedSort, setSelectedSort] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedRating, setSelectedRating] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
 
   useEffect(() => {
     setProducts([...masterProductList]);
@@ -53,6 +55,12 @@ export default function Shop() {
     setProducts([...filteredProducts]);
   }, [selectedCategory]);
 
+  useEffect(()=>{
+    if(selectedCategory || selectedPrice || selectedRating || selectedSort ){
+      setClear(false);
+    }
+  },[selectedCategory])
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
@@ -68,6 +76,7 @@ export default function Shop() {
         <RatingFilter />
         <SortByFilter />
         <OutOfStockFilter />
+        <ClearButton clearHandler={setClear} clearFlag={clear}/>
       </div>
 
       <div className="grid grid-cols-4 gap-1 mb-2 mx-1">

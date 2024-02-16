@@ -1,6 +1,5 @@
 import React from "react";
 import Product from "../components/Product";
-import useFetch from "../utils/useFetch";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -37,9 +36,13 @@ const data = [
 ];
 
 function ProductDetail(props) {
+  const [activeTab, setActiveTab] = useState("Description");
+  const [randomNumbers, setRandomNumbers] = useState([]);
   const cart = useSelector((state) => state.cart.cart);
+  const { id } = useParams();
   const masterProductList = useSelector((state) => state.products.products);
-
+  const products = masterProductList;
+  
   const dispatch = useDispatch();
 
   const onProductAdd = (details) => {
@@ -52,12 +55,29 @@ function ProductDetail(props) {
     dispatch(removeProduct(details));
   };
 
-  const { id } = useParams();
-
-  const products = masterProductList;
-
   const product = products.filter((val) => val.id == id);
-  const [activeTab, setActiveTab] = React.useState("Description");
+
+  useEffect(()=>{
+    let generateRandomNumbersExcept = (count, min, max, exclude) => {
+      const numbers = [];
+      while (numbers.length < count) {
+        let rand = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (rand !== exclude && !numbers.includes(rand)) {
+          numbers.push(rand);
+        }
+      }
+      return numbers;
+    };
+    
+    const randomNumbers = generateRandomNumbersExcept(4, 3, 20, id);
+    setRandomNumbers(randomNumbers);
+    
+  },[])
+  
+  var filteredProducts = products.filter(product => randomNumbers.includes(product.id));
+
+
+
   return (
     <>
       <div className="flex flex-col justify-center items-center">
@@ -265,14 +285,13 @@ function ProductDetail(props) {
             <section className="flex flex-col justify-start px-5 mb-5">
               <div className="flex items-center justify-between">
                 <h2 className="text-black font-semibold text-3xl">
-                  Related Products
+                  You may also buy
                 </h2>
               </div>
               <div className="flex justify-between items-center">
-                <Product />
-                <Product />
-                <Product />
-                <Product />
+                {filteredProducts?.map((product) => {
+                  return <Product key={product.id} details={product}></Product>;
+                })}
               </div>
             </section>
           </div>

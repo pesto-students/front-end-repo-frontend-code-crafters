@@ -16,16 +16,16 @@ export function PriceFilter(props) {
         //   return `₹${e?.props.value[0][0]} - ₹${e?.props.value[0][1]}`;
         // }}
       >
-        <Option value={[0,50]} className="text-black">
+        <Option value={"0,50"} className="text-black">
           ₹0 - ₹50
         </Option>
-        <Option value={[50,100]} className="text-black">
+        <Option value={"50,100"} className="text-black">
           ₹50 - ₹100
         </Option>
-        <Option value={[100,200]} className="text-black">
+        <Option value={"100,200"} className="text-black">
           ₹100 - ₹200
         </Option>
-        <Option value={[200,99999]} className="text-black">
+        <Option value={"200,99999"} className="text-black">
           ₹200+
         </Option>
       </Select>
