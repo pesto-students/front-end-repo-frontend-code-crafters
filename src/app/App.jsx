@@ -16,9 +16,7 @@ export default function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false)
   const isLoggedIn = sessionStorage.getItem("token");
 
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+  useEffect(() => {}, [isLoggedIn]);
   return (
     <>
       <div className="overflow-y-scroll border-5 border-gray-800 rounded-lg bg-white flex flex-col m-auto overflow-x-hidden">

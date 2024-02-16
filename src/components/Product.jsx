@@ -43,10 +43,6 @@ export default function Product(props) {
     dispatch(addProductWishlist(details));
   };
 
-  const handleClick = (ID) => {
-    console.log("inside function handleClick = ", ID);
-  };
-
   return (
     <>
       <div className="h-80 w-64 border border-gray-100 rounded-lg text-black">

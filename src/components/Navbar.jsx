@@ -42,22 +42,22 @@ export default function Navbar() {
       setIsSearchbarAllowed(true);
       setIsWishlistAllowed(true);
       setIsCartAllowed(true);
-      setIsAvatarAllowed(true)
+      setIsAvatarAllowed(true);
     } else if (path === "/wishlist") {
       setIsSearchbarAllowed(false);
       setIsWishlistAllowed(false);
       setIsCartAllowed(true);
-      setIsAvatarAllowed(true)
-    } else if(path === "/cart"){
+      setIsAvatarAllowed(true);
+    } else if (path === "/cart") {
       setIsSearchbarAllowed(false);
       setIsWishlistAllowed(true);
       setIsCartAllowed(false);
-      setIsAvatarAllowed(true)
-    }else {
+      setIsAvatarAllowed(true);
+    } else {
       setIsSearchbarAllowed(false);
       setIsWishlistAllowed(false);
       setIsCartAllowed(false);
-      setIsAvatarAllowed(false)
+      setIsAvatarAllowed(false);
     }
   }, [path]);
 
@@ -112,7 +112,9 @@ export default function Navbar() {
                   alt="wishlist icon"
                 />
               </Link>
-              {isWishlistAllowed && isCartAllowed ? <img className="" src={divider} alt="divider icon" /> : null}
+              {isWishlistAllowed && isCartAllowed ? (
+                <img className="" src={divider} alt="divider icon" />
+              ) : null}
             </>
           ) : null}
           {isCartAllowed ? (
@@ -126,15 +128,17 @@ export default function Navbar() {
             </Link>
           ) : null}
           <div className="relative inline-block text-left ml-10 mb-2">
-          {isAvatarAllowed ? <div>
-              <button type="button" onClick={() => setIsOpen(!isOpen)}>
-                <img
-                  src={avatar}
-                  className="inline-block h-8 w-8 rounded-full"
-                  alt="Avatar"
-                />
-              </button>
-            </div> : null }
+            {isAvatarAllowed ? (
+              <div>
+                <button type="button" onClick={() => setIsOpen(!isOpen)}>
+                  <img
+                    src={avatar}
+                    className="inline-block h-8 w-8 rounded-full"
+                    alt="Avatar"
+                  />
+                </button>
+              </div>
+            ) : null}
 
             {isOpen && (
               <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">

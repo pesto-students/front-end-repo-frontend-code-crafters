@@ -44,18 +44,16 @@ const data = [
   {
     label: "Description",
     value: "Description",
-    desc: `Store in a cool and dry place, away from sunlight.`,
+    desc: `Store in a cool and dry place, away from sunlight. Refrigerate perishable items, keep dry goods in cool, dry places, and ensure proper packaging to prevent spoilage and maintain flavor`,
   },
   {
     label: "Customer Feedback",
     value: "Customer Feedback",
-    desc: `Because it's about motivating the doers. Because I'm here
-      to follow my dreams and inspire other people to follow their dreams, too.`,
+    desc: `Proper storage of grocery items is crucial for maintaining freshness and maximizing shelf life. By following these storage guidelines, you can enjoy your grocery items at their best for longer periods, reducing waste and ensuring a satisfying culinary experience.`,
   },
 ];
 
 function ProductDetail(props) {
-
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
@@ -403,17 +401,21 @@ function ProductDetail(props) {
               <p className="text-md font-bold text-gray-900">4.9</p>
             </div>
             <div className="flex my-1">
-              {product[0].discount > 0 && <span className="text-lg text-gray-400 line-through mr-1">
-                ₹{product[0]?.price}
-              </span>}
+              {product[0].discount > 0 && (
+                <span className="text-lg text-gray-400 line-through mr-1">
+                  ₹{product[0]?.price}
+                </span>
+              )}
               <h3 className="text-lg font-medium text-primary mr-2">
-                ₹{product[0]?.price * ( 100 - product[0]?.discount)/100}
+                ₹{(product[0]?.price * (100 - product[0]?.discount)) / 100}
               </h3>
-              {product[0].discount > 0 && <Chip
-                className="capitalize font-light bg-red-chip text-red-error justify-center w-16 rounded-full"
-                variant="filled"
-                value={`${product[0].discount} % off`}
-              />}
+              {product[0].discount > 0 && (
+                <Chip
+                  className="capitalize font-light bg-red-chip text-red-error justify-center w-16 rounded-full"
+                  variant="filled"
+                  value={`${product[0].discount} % off`}
+                />
+              )}
             </div>
             {/* <hr className=" w-full bg-gray-100 border"></hr> */}
             <p className="text-xs text-gray-500 max-w-[300px]">
@@ -435,7 +437,7 @@ function ProductDetail(props) {
                   +
                 </Button>
               </div>
-              
+
               <WishlistButton className="ml-5" />
             </div>
           </div>
@@ -473,35 +475,33 @@ function ProductDetail(props) {
                     <span className="text-black text-sm my-2">{desc}</span>
                   </div>
                 ))}
-              {
-                activeTab === "Customer Feedback" && (
-                  // data.map(({ value, desc }) => (
-                  //   <TabPanel key={value} value={value}>
-                  <div className="grid grid-cols-3 !min-w-4xl border-b border-gray-200">
-                    <p className="col-span-3 text-sm pt-2 text-gray-900 font-small">
-                      Kieron James
-                    </p>
-                    <div className="col-span-2 pt-1 flex items-center justify-start">
-                      <svg
-                        className="w-4 h-3 text-yellow-800 me-1"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="currentColor"
-                        viewBox="0 0 22 20"
-                      >
-                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                      </svg>
-                      <p className="text-sm font-bold text-gray-900">4.9</p>
-                    </div>
-                    <span className="text-xs font-small text-right text-gray-700">
-                      {"12/01/2024"}
-                    </span>
-                    <p className="text-xs pt-2 pb-2 font-small text-gray-700">
-                      Duis at ullamcorper nulla, eu dictum eros.
-                    </p>
+              {activeTab === "Customer Feedback" && (
+                // data.map(({ value, desc }) => (
+                //   <TabPanel key={value} value={value}>
+                <div className="grid grid-cols-3 !min-w-4xl border-b border-gray-200">
+                  <p className="col-span-3 text-sm pt-2 text-gray-900 font-small">
+                    Kieron James
+                  </p>
+                  <div className="col-span-2 pt-1 flex items-center justify-start">
+                    <svg
+                      className="w-4 h-3 text-yellow-800 me-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 22 20"
+                    >
+                      <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                    </svg>
+                    <p className="text-sm font-bold text-gray-900">4.9</p>
                   </div>
-                )
-              }
+                  <span className="text-xs font-small text-right text-gray-700">
+                    {"12/01/2024"}
+                  </span>
+                  <p className="text-xs pt-2 pb-2 font-small text-gray-700">
+                    Duis at ullamcorper nulla, eu dictum eros.
+                  </p>
+                </div>
+              )}
             </TabsBody>
           </Tabs>
         </div>

@@ -11,8 +11,6 @@ import Cookies from 'js-cookie';
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const Login = (props) => {
-  // const {setIsLoggedInFlag, isLoggedIn} = props
-  // console.log(props);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const Register = () => {
@@ -47,9 +47,9 @@ const Register = () => {
 
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
-    let cookieValue = Cookies.get('token');
+    let cookieValue = Cookies.get("token");
     sessionStorage.setItem("token", cookieValue);
-    dispatch(loginSuccess(true)).then(() => navigate("/shop"))
+    dispatch(loginSuccess(true)).then(() => navigate("/shop"));
   };
 
   return (

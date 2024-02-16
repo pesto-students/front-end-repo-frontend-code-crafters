@@ -9,6 +9,7 @@ import {
 } from "../app/reducers/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const states = [
   { value: "IN-AN", label: "Andaman and Nicobar Islands" },
@@ -55,14 +56,7 @@ export default function Checkout() {
   const navigate = useNavigate();
 
   const totalPrice = useSelector(cartValueSelector);
-  // const [data, setData] = useState({ fname: "", lname: "", street: "", pincode: "", phoneNumber: "" });
-  // const handleChange = ({ currentTarget: input }) => {
-  //   setData({ ...data, [input.name]: input.value });
-  // };
-  // useEffect(() => {
-  // });
 
-  // const handleSubmit = () => {
     const initPayment = (data) => {
       const options = {
         key: import.meta.env.RAZORPAY_KEY_ID,
@@ -74,7 +68,7 @@ export default function Checkout() {
         order_id: data.id,
         handler: async (response) => {
           try {
-            const verifyUrl = `http://localhost:4000/payment/verify`;
+            const verifyUrl = `${VITE_API_URL}/payment/verify`;
             const { data } = await axios.post(verifyUrl, response);
             console.log("Verify",data);
           } catch (error) {
@@ -91,9 +85,8 @@ export default function Checkout() {
 
     const handlePayment = async () => {
       try {
-        const orderUrl = "http://localhost:4000/payment/order";
+        const orderUrl = `${VITE_API_URL}/payment/order`;
         const { data } = await axios.post(orderUrl, { amount: totalPrice });
-        console.log("Data-",data.data);
         initPayment(data.data);
       } catch (error) {
         console.log(error);
