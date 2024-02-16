@@ -73,9 +73,9 @@ export default function Product(props) {
           <div className="pl-2">
             <p className="text-sm  text-gray-500">{details?.name}</p>
             <p className="text-sm  text-gray-900">
-              ₹{details?.price}{" "}
-              {!(qty > 0) && (
-                <span className="text-gray-400 line-through">₹29.99</span>
+              ₹{details?.price * ( 100 - details?.discount)/100}{" "}
+              {(details?.discount > 0) && (
+                <span className="text-gray-400 line-through">₹{details?.price}</span>
               )}
             </p>
             <div className="flex items-center justify-start">
