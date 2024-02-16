@@ -18,7 +18,7 @@ const wishlistSlice = createSlice({
         return;
       } else {
         // immer makes this immutable
-        state.wishlist.push({ ...action.payload, isWishlist: true });
+        state.wishlist.push({ ...action.payload});
       }
     },
     removeProductWishlist: (state, action) => {

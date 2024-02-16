@@ -13,7 +13,6 @@ import WishlistButton from "./WishlistButton.jsx";
 import { addProductWishlist } from "../app/reducers/wishlistSlice.js";
 
 export default function Product(props) {
-  // const [quantity, setQuantity] = useState(0);
   const { details } = props;
   const dispatch = useDispatch();
 
@@ -36,16 +35,17 @@ export default function Product(props) {
   const onProductSubtract = (details) => {
     dispatch(subtractProduct(details));
   };
-  const onProductDelete = () => {
-    dispatch(removeProduct(details));
-  };
-  const onProductAddWishlist = (details) => {
-    dispatch(addProductWishlist(details));
-  };
 
   return (
     <>
-      <div className="h-80 w-64 border border-gray-100 rounded-lg text-black">
+      <div className="border border-gray-100 rounded-lg text-black">
+        <div className="text-right pt-2 pr-2">
+          <WishlistButton
+            classNames=""
+            details={details}
+            isWishlist={details?.isWishlist}
+          />
+        </div>
         <div className="flex items-center justify-center">
           <div>
             <Link to={`/products/${details?.id}`}>
@@ -57,21 +57,16 @@ export default function Product(props) {
               />
             </Link>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <WishlistButton
-              classNames="ml-5"
-              details={details}
-              isWishlist={details?.isWishlist}
-            />
-          </div>
         </div>
         <div className="flex justify-between items-center mt-2">
           <div className="pl-2">
             <p className="text-sm  text-gray-500">{details?.name}</p>
             <p className="text-sm  text-gray-900">
-              ₹{details?.price * ( 100 - details?.discount)/100}{" "}
-              {(details?.discount > 0) && (
-                <span className="text-gray-400 line-through">₹{details?.price}</span>
+              ₹{(details?.price * (100 - details?.discount)) / 100}{" "}
+              {details?.discount > 0 && (
+                <span className="text-gray-400 line-through">
+                  ₹{details?.price}
+                </span>
               )}
             </p>
             <div className="flex items-center justify-start">
@@ -85,13 +80,6 @@ export default function Product(props) {
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
               </svg>
               <p className="text-sm font-bold text-gray-900">4.9</p>
-              {/* <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full"></span> */}
-              {/* <a
-                  href="#"
-                  className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white"
-                >
-                  73 reviews
-                </a> */}
             </div>
           </div>
           <div className="flex items-center border border-gray-300 rounded-full mr-2 p-1">
