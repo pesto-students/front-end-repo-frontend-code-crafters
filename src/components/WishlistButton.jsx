@@ -11,7 +11,6 @@ function WishlistButton(props) {
   const [isClicked, setIsClicked] = useState(false);
   const { details, isWishlist, classNames } = props;
   const dispatch = useDispatch();
-  console.log("WIsh", isWishlist, details,);
   
   const onProductAddWishlist = (details) => {
     dispatch(addProductWishlist(details));
@@ -36,7 +35,7 @@ function WishlistButton(props) {
         width="53"
         height="52"
         viewBox="0 0 53 52"
-        className={[`${isWishlist ? "fill-primary" : ""}`, "cursor-pointer"].join(" ")}
+        className={[`${isWishlist ? "fill-primary" : ""}`, "ml-5 cursor-pointer"].join(" ")}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

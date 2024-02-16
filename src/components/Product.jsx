@@ -52,7 +52,7 @@ export default function Product(props) {
               <img
                 className="px-1 pt-1"
                 src={details?.image}
-                onClick={() => handleClick(details?.id)}
+                // onClick={() => handleClick(details?.id)}
                 alt="Apple"
               />
             </Link>

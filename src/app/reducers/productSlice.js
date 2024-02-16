@@ -46,8 +46,7 @@ const initialState = {
     {
       description: "1kg tomato",
       id: 3,
-      image:
-        "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
+      image: tomato,
       name: "Tomato",
       price: 20,
       stockStatus: 256,
@@ -257,13 +256,9 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     toggleProductWishlist: (state, action) => {
-      const copyProduct = [...state.products];
-      console.log("Dispatched", action.payload.id, copyProduct);
-
       const val = state.products.findIndex(
         (product) => product.id === action.payload.id
       );
-      console.log(val, state.products[val]);
       state.products[val] = {
         ...state.products[val],
         isWishlist: !state.products[val]["isWishlist"],

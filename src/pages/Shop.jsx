@@ -1,30 +1,12 @@
 import React, { useEffect, useState } from "react";
-
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-
 import Product from "../components/Product";
 import { CategoryFilter } from "../components/shop/filters/Category";
 import { PriceFilter } from "../components/shop/filters/Price";
 import { RatingFilter } from "../components/shop/filters/Rating";
 import { SortByFilter } from "../components/shop/filters/Sort";
 import { OutOfStockFilter } from "../components/shop/filters/OutOfStock";
-
-import apple from "../assets/products/apple.png";
-import cauliflower from "../assets/products/cauliflower.png";
-import chinese_cabbage from "../assets/products/chinese_cabbage.png";
-import corn from "../assets/products/corn.png";
-import cucumber from "../assets/products/cucumber.png";
-import eggplant from "../assets/products/eggplant.png";
-import green_capsicum from "../assets/products/green_capsicum.png";
-import green_chilly from "../assets/products/green_chilly.png";
-import lettuce from "../assets/products/lettuce.png";
-import mango from "../assets/products/mango.png";
-import okra from "../assets/products/okra.png";
-import potato from "../assets/products/potato.png";
-import red_capsicum from "../assets/products/red_capsicum.png";
-import red_chilly from "../assets/products/red_chilly.png";
-import tomato from "../assets/products/tomato.png";
 import { useSelector } from "react-redux";
 
 export default function Shop() {
@@ -49,38 +31,40 @@ export default function Shop() {
     setActive(active - 1);
   };
 
-  // Sample API to test Redux
-
   const masterProductList = useSelector((state) => state.products.products);
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  
+  // const [selectedPrice, setSelectedPrice] = useState("");
+  // const [selectedRating, setSelectedRating] = useState("");
+  // const [selectedSort, setSelectedSort] = useState("");
+
   useEffect(() => {
     setProducts([...masterProductList]);
-    console.log(masterProductList);
   }, [masterProductList]);
-  
+
   useEffect(() => {
     let filteredProducts = masterProductList.filter(
       (product) =>
-      product.category === selectedCategory || selectedCategory === ""
-      );
-      if (!selectedCategory) {
-        filteredProducts = masterProductList;
-      }
-      setProducts([...filteredProducts]);
-    }, [selectedCategory]);
-    
-    const handleCategoryChange = (category) => {
-      setSelectedCategory(category);
-    };
-    console.log(products);
-    
-    return (
-      <>
+        (product.category === selectedCategory || selectedCategory === "")
+    );
+    if (!selectedCategory) {
+      filteredProducts = masterProductList;
+    }
+    setProducts([...filteredProducts]);
+  }, [selectedCategory]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+  // const handlePriceChange = (price) => {
+  //   setSelectedPrice(price);
+  // };
+  // priceValue={selectedPrice} priceChangeHandler={handlePriceChange}
+  return (
+    <>
       <div className="flex items-center justify-between m-2">
-        <CategoryFilter categoryChangeHandler={handleCategoryChange} />
-        <PriceFilter />
+        <CategoryFilter categoryValue={selectedCategory} categoryChangeHandler={handleCategoryChange} />
+        <PriceFilter  />
         <RatingFilter />
         <SortByFilter />
         <OutOfStockFilter />
