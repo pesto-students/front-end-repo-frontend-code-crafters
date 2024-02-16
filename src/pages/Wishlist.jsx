@@ -10,51 +10,7 @@ import {
   removeProduct,
 } from "../app/reducers/cartSlice.js";
 import { removeProductWishlist } from "../app/reducers/wishlistSlice.js";
-// const cart = [
-//   {
-//     description: "200g cheese block",
-//     id: 1,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-//     name: "Cheese",
-//     price: 10,
-//     price_id: "price_1HuavSGuhXEITAut56IgndJf",
-//     stockStatus: 1,
-//   },
-//   {
-//     description: "1 piece of tomato",
-//     id: 3,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-//     name: "Tomato",
-//     price: 2.75,
-//     price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-//     stockStatus: 1,
-//   },
-//   {
-//     description: "500g pineapple",
-//     id: 4,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-//     name: "Pineapple",
-//     price: 3.25,
-//     price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-//     stockStatus: 1,
-//   },
-//   {
-//     description: "200ml milk bottle",
-//     id: 2,
-//     image: apple,
-//     name: "Apple",
-//     price: 5,
-//     price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-//     stockStatus: 0,
-//   },
-// ];
-
-// const totalPrice = cart.reduce((total, product) => {
-//   total + product.price * product.quantity, 0;
-// });
+import { toggleProductWishlist } from "../app/reducers/productSlice.js";
 
 export default function Wishlist() {
   const wishlist = useSelector((state) => state.wishlist.wishlist);
@@ -68,6 +24,7 @@ export default function Wishlist() {
 
   const onProductDelete = (details) => {
     dispatch(removeProductWishlist(details));
+    dispatch(toggleProductWishlist(details));
   };
   return (
     <>

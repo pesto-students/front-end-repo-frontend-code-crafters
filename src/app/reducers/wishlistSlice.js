@@ -13,12 +13,9 @@ const wishlistSlice = createSlice({
         (product) => product.id === action.payload.id
       );
       if (existingProduct) {
-        // immer makes this immutable
-        // existingProduct.quantity++;
         return;
       } else {
-        // immer makes this immutable
-        state.wishlist.push({ ...action.payload, isWishlist: true });
+        state.wishlist.push({ ...action.payload, isWishlist: true});
       }
     },
     removeProductWishlist: (state, action) => {
