@@ -141,7 +141,7 @@ function Landing() {
           </h2>
           <div className="flex justify-around items-center mt-5">
             <Category img={vegetables} text="Vegetables" />
-            <Category img={snacks} text="Snacks" />
+            <Category img={snacks} text="Dairy" />
             <Category img={fruits} text="Fruits" />
             <Category img={drinks} text="Beverages" />
           </div>

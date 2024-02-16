@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import apple from "../assets/products/apple.png";
 import Button from "../components/Button";
 import axios from "axios";
@@ -9,51 +9,7 @@ import {
 } from "../app/reducers/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-// const cart = [
-//   {
-//     description: "200g cheese block",
-//     id: 1,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-//     name: "Cheese",
-//     price: 10,
-//     price_id: "price_1HuavSGuhXEITAut56IgndJf",
-//     quantity: 3,
-//   },
-//   {
-//     description: "1 piece of tomato",
-//     id: 3,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-//     name: "Tomato",
-//     price: 2.75,
-//     price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-//     quantity: 3,
-//   },
-//   {
-//     description: "500g pineapple",
-//     id: 4,
-//     image:
-//       "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-//     name: "Pineapple",
-//     price: 3.25,
-//     price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-//     quantity: 2,
-//   },
-//   {
-//     description: "200ml milk bottle",
-//     id: 2,
-//     image: apple,
-//     name: "Apple",
-//     price: 5,
-//     price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-//     quantity: 1,
-//   },
-// ];
-// const totalPrice = cart.reduce((total, product) => {
-//   total + product.price * product.quantity, 0;
-// });
-// console.log(totalPrice);
+
 const states = [
   { value: "IN-AN", label: "Andaman and Nicobar Islands" },
   { value: "IN-AP", label: "Andhra Pradesh" },
@@ -96,6 +52,7 @@ const states = [
 
 export default function Checkout() {
   const cart = useSelector((state) => state.cart.cart);
+  const navigate = useNavigate();
 
   const totalPrice = useSelector(cartValueSelector);
   // const [data, setData] = useState({ fname: "", lname: "", street: "", pincode: "", phoneNumber: "" });
@@ -106,7 +63,6 @@ export default function Checkout() {
   // });
 
   // const handleSubmit = () => {
-    console.log("submitted");
     const initPayment = (data) => {
       const options = {
         key: import.meta.env.RAZORPAY_KEY_ID,
@@ -118,7 +74,7 @@ export default function Checkout() {
         order_id: data.id,
         handler: async (response) => {
           try {
-            const verifyUrl = "http://localhost:4000/payment/verify";
+            const verifyUrl = `http://localhost:4000/payment/verify`;
             const { data } = await axios.post(verifyUrl, response);
             console.log("Verify",data);
           } catch (error) {
@@ -126,11 +82,11 @@ export default function Checkout() {
           }
         },
         theme: {
-          color: "#3399cc",
+          color: "#0962AE",
         },
       };
       const rzp = new window.Razorpay(options);
-      rzp.open().then(redirect);
+      rzp.open();
     };
 
     const handlePayment = async () => {
@@ -364,7 +320,7 @@ export default function Checkout() {
                   <strong>₹{totalPrice || 100}</strong>
                 </span>
               </div>
-              <h3 className="text-gray-900 text-sm font-medium py-2">
+              {/* <h3 className="text-gray-900 text-sm font-medium py-2">
                 Payment Method
               </h3>
               <div className="flex flex-col gap-2">
@@ -394,17 +350,17 @@ export default function Checkout() {
                     value="upi"
                   />
                   <span className="ml-2 text-xs">UPI</span>
-                </label>
+                </label> */}
                 {/* <Link to="/success" className="pb-4 pt-2"> */}
                   <Button
-                    className=" text-white font-sm bg-primary text-xs py-2 px-3 rounded-full text-center"
+                    className=" text-white font-sm bg-primary text-xs py-2 px-3 mb-2 rounded-full text-center"
                     onClick={handlePayment}
                     type="submit"
                   >
                     Place Order
                   </Button>
                 {/* </Link> */}
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>
