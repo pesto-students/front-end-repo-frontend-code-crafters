@@ -22,13 +22,10 @@ function WishlistButton(props) {
   const handleClick = () => {
     if (!isClicked) {
       onProductAddWishlist(details);
-      console.log("added product");
     } else {
       onProductSubtractWishlist(details);
-      console.log("removed product");
     }
   };
-  console.log("details", details);
   return (
     <button onClick={handleClick} className={classNames}>
       <svg

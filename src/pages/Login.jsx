@@ -10,7 +10,9 @@ import Cookies from 'js-cookie';
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-const Login = () => {
+const Login = (props) => {
+  // const {setIsLoggedInFlag, isLoggedIn} = props
+  // console.log(props);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +22,6 @@ const Login = () => {
   const googleAuth = () => {
     window.open(`${VITE_API_URL}/auth/google/callback`, "_self");
     let cookieValue = Cookies.get('token');
-    console.log(cookieValue);
     sessionStorage.setItem("token", cookieValue);
     dispatch(loginSuccess(true)).then(() => navigate("/shop"))
   };
@@ -45,7 +46,6 @@ const Login = () => {
       const token = await res.json();
       sessionStorage.setItem("token", token.data);
       dispatch(loginSuccess(token)).then(() => navigate("/shop"));
-      // navigate("/shop");
     } catch (error) {
       if (
         error.response &&

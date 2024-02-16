@@ -1,5 +1,4 @@
 import React from "react";
-import apple from "../assets/products/apple.png";
 import Product from "../components/Product";
 import useFetch from "../utils/useFetch";
 import { useState, useEffect } from "react";
@@ -25,13 +24,27 @@ import {
 import Button from "../components/Button";
 import WishlistButton from "../components/WishlistButton.jsx";
 
+import apple from "../assets/products/apple.png";
+import cauliflower from "../assets/products/cauliflower.png";
+import chinese_cabbage from "../assets/products/chinese_cabbage.png";
+import corn from "../assets/products/corn.png";
+import cucumber from "../assets/products/cucumber.png";
+import eggplant from "../assets/products/eggplant.png";
+import green_capsicum from "../assets/products/green_capsicum.png";
+import green_chilly from "../assets/products/green_chilly.png";
+import lettuce from "../assets/products/lettuce.png";
+import mango from "../assets/products/mango.png";
+import okra from "../assets/products/okra.png";
+import potato from "../assets/products/potato.png";
+import red_capsicum from "../assets/products/red_capsicum.png";
+import red_chilly from "../assets/products/red_chilly.png";
+import tomato from "../assets/products/tomato.png";
+
 const data = [
   {
     label: "Description",
     value: "Description",
-    desc: `It really matters and then like it really doesn't matter.
-      What matters is the people who are sparked by it. And the people 
-      who are like offended by it, it doesn't matter.`,
+    desc: `Store in a cool and dry place, away from sunlight.`,
   },
   {
     label: "Customer Feedback",
@@ -42,22 +55,8 @@ const data = [
 ];
 
 function ProductDetail(props) {
-  // const [product, setProduct] = useState({});
-  // const {details} = props
-  // const { get } = useFetch("https://react-tutorial-demo.firebaseio.com/");
-  // const params = useParams();
-  // console.log("params", params);
-  // useEffect(() => {
-  //   get(`productinfo/id${params.id}.json`)
-  //     .then((data) => {
-  //       setProduct(data);
-  //     })
-  //     .catch((error) => console.log("Could not load product details", error));
-  // }, []);
-  // console.log("Product",product);
 
   const cart = useSelector((state) => state.cart.cart);
-  console.log("cart", cart);
   const dispatch = useDispatch();
 
   const onProductAdd = (details) => {
@@ -79,10 +78,12 @@ function ProductDetail(props) {
       image:
         "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
       name: "Cheese",
-      price: 10,
-      stockStatus: 1,
+      price: 50,
+      stockStatus: 256,
       price_id: "price_1HuavSGuhXEITAut56IgndJf",
-      isWishlist : false
+      isWishlist: false,
+      category: "dairy",
+      discount: 0,
     },
     {
       description: "200ml milk bottle",
@@ -90,21 +91,25 @@ function ProductDetail(props) {
       image:
         "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
       name: "Milk",
-      price: 5,
-      stockStatus: 1,
+      price: 20,
+      stockStatus: 256,
       price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-      isWishlist : false
+      isWishlist: false,
+      category: "dairy",
+      discount: 0,
     },
     {
-      description: "1 piece of tomato",
+      description: "1kg tomato",
       id: 3,
       image:
         "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
       name: "Tomato",
-      price: 2.75,
-      stockStatus: 1,
+      price: 20,
+      stockStatus: 256,
       price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
-      isWishlist : false
+      isWishlist: false,
+      category: "vegetables",
+      discount: 10,
     },
     {
       description: "500g pineapple",
@@ -112,10 +117,193 @@ function ProductDetail(props) {
       image:
         "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
       name: "Pineapple",
-      price: 3.25,
-      stockStatus: 1,
+      price: 40,
+      stockStatus: 256,
       price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
-      isWishlist : false
+      isWishlist: false,
+      category: "fruits",
+      discount: 0,
+    },
+    {
+      description: "250g cauliflower",
+      id: 5,
+      image: cauliflower,
+      name: "Cauliflower",
+      price: 21,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJc",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "500g chinese cabbage",
+      id: 6,
+      image: chinese_cabbage,
+      name: "Chinese Cabbage",
+      price: 30,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJcc",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "200g sweet corn",
+      id: 7,
+      image: corn,
+      name: "Sweet Corn",
+      price: 20,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJsc",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 15,
+    },
+    {
+      description: "1 piece green cucumber",
+      id: 8,
+      image: cucumber,
+      name: "Green Cucumber",
+      price: 40,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJgc",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "250g eggplant",
+      id: 9,
+      image: eggplant,
+      name: "Eggplant",
+      price: 35,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJegg",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "250g green capsicum",
+      id: 10,
+      image: green_capsicum,
+      name: "Green Capsicum",
+      price: 60,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJcap",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 30,
+    },
+    ,
+    {
+      description: "250g green chilly",
+      id: 11,
+      image: green_chilly,
+      name: "Green Chilly",
+      price: 20,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJgchilly",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 5,
+    },
+    {
+      description: "250g lettuce",
+      id: 12,
+      image: lettuce,
+      name: "Lettuce",
+      price: 75,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJlett",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "1kg red mango",
+      id: 13,
+      image: mango,
+      name: "Red Mango",
+      price: 250,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJmango",
+      isWishlist: false,
+      category: "fruits",
+      discount: 20,
+    },
+    {
+      description: "500g Ladies Finger",
+      id: 14,
+      image: okra,
+      name: "Ladies Finger (Okra)",
+      price: 45,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJokra",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "1kg potato",
+      id: 15,
+      image: potato,
+      name: "Potato",
+      price: 60,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJpotato",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 10,
+    },
+    {
+      description: "250g red capsicum",
+      id: 16,
+      image: green_capsicum,
+      name: "Green Capsicum",
+      price: 60,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 30,
+    },
+    {
+      description: "250g green capsicum",
+      id: 17,
+      image: red_capsicum,
+      name: "Red Capsicum",
+      price: 70,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJredcap",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 15,
+    },
+    {
+      description: "250g Kashmiri red chilly",
+      id: 18,
+      image: red_chilly,
+      name: "Kashmiri Red Chilly",
+      price: 80,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJkash",
+      isWishlist: false,
+      category: "vegetables",
+      discount: 0,
+    },
+    {
+      description: "250g green apple",
+      id: 19,
+      image: apple,
+      name: "Green Apple",
+      price: 100,
+      stockStatus: 256,
+      price_id: "price_1HxW59GuhXEITAutCwoYZoOJkash",
+      isWishlist: false,
+      category: "fruits",
+      discount: 10,
     },
   ];
 
@@ -213,26 +401,19 @@ function ProductDetail(props) {
                 <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
               </svg>
               <p className="text-md font-bold text-gray-900">4.9</p>
-              {/* <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full"></span>
-              <a
-                          href="#"
-                          className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white"
-                        >
-                          73 reviews
-                        </a> */}
             </div>
             <div className="flex my-1">
-              <span className="text-lg text-gray-400 line-through mr-1">
-                ₹29.99
-              </span>
-              <h3 className="text-lg font-medium text-primary mr-2">
+              {product[0].discount > 0 && <span className="text-lg text-gray-400 line-through mr-1">
                 ₹{product[0]?.price}
+              </span>}
+              <h3 className="text-lg font-medium text-primary mr-2">
+                ₹{product[0]?.price * ( 100 - product[0]?.discount)/100}
               </h3>
-              <Chip
+              {product[0].discount > 0 && <Chip
                 className="capitalize font-light bg-red-chip text-red-error justify-center w-16 rounded-full"
                 variant="filled"
-                value={`${64} % off`}
-              />
+                value={`${product[0].discount} % off`}
+              />}
             </div>
             {/* <hr className=" w-full bg-gray-100 border"></hr> */}
             <p className="text-xs text-gray-500 max-w-[300px]">
@@ -254,35 +435,7 @@ function ProductDetail(props) {
                   +
                 </Button>
               </div>
-              {/* <button
-                className="ml-5"
-                onClick={() => {
-                  alert("Added product to fav");
-                }}
-              >
-                <svg
-                  width="53"
-                  height="52"
-                  viewBox="0 0 53 52"
-                  className="hover:fill-primary"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="0.5"
-                    width="52"
-                    height="52"
-                    rx="26"
-                    fill="#20B526"
-                    fillOpacity="0.1"
-                  />
-                  <path
-                    d="M26.4996 33.5451C9.83328 24.3334 21.4999 14.3334 26.4996 20.6567C31.4999 14.3334 43.1666 24.3334 26.4996 33.5451Z"
-                    stroke="#096A2E"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </button> */}
+              
               <WishlistButton className="ml-5" />
             </div>
           </div>
@@ -313,9 +466,6 @@ function ProductDetail(props) {
             <TabsBody>
               {activeTab === "Description" &&
                 data.map(({ value, desc }) => (
-                  // <TabPanel key={value} value={value}>
-                  //   {desc}
-                  // </TabPanel>
                   <div
                     key={value}
                     className="flex justify-center max-w-3xl border-b border-gray-200"
@@ -329,7 +479,7 @@ function ProductDetail(props) {
                   //   <TabPanel key={value} value={value}>
                   <div className="grid grid-cols-3 !min-w-4xl border-b border-gray-200">
                     <p className="col-span-3 text-sm pt-2 text-gray-900 font-small">
-                      Customer Name
+                      Kieron James
                     </p>
                     <div className="col-span-2 pt-1 flex items-center justify-start">
                       <svg
@@ -351,9 +501,6 @@ function ProductDetail(props) {
                     </p>
                   </div>
                 )
-                //   </TabPanel>
-                // )
-                // )
               }
             </TabsBody>
           </Tabs>

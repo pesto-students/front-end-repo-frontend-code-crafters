@@ -35,9 +35,6 @@ export default function Navbar() {
     dispatch(logout());
     navigate("/login");
   };
-  const handleSearchSubmit = () => {
-    alert("Search clicked");
-  };
   const paths = ["/shop", "/products", "/products/:id", "/wishlist"];
 
   useEffect(() => {
@@ -62,12 +59,6 @@ export default function Navbar() {
       setIsCartAllowed(false);
       setIsAvatarAllowed(false)
     }
-
-    // if (path === "/"){
-    //   setIsSearchbarAllowed(false)
-    //   setIsCartAllowed(false)
-    // }
-    // else setIsSearchbarAllowed(false)
   }, [path]);
 
   return (

@@ -18,69 +18,69 @@ import farmer from "../assets/landing/farmer-1.png";
 import farmer2 from "../assets/landing/farmer-2.png";
 import check from "../assets/landing/check.png";
 
-import apple from "../assets/products/apple.png"
-import cauliflower from "../assets/products/cauliflower.png"
-import chinese_cabbage from "../assets/products/chinese_cabbage.png"
-import corn from "../assets/products/corn.png"
-import cucumber from "../assets/products/cucumber.png"
-import eggplant from "../assets/products/eggplant.png"
-import green_capsicum from "../assets/products/green_capsicum.png"
-import green_chilly from "../assets/products/green_chilly.png"
-import lettuce from "../assets/products/lettuce.png"
-import mango from "../assets/products/mango.png"
-import okra from "../assets/products/okra.png"
-import potato from "../assets/products/potato.png"
-import red_capsicum from "../assets/products/red_capsicum.png"
-import tomato from "../assets/products/tomato.png"
+import apple from "../assets/products/apple.png";
+import cauliflower from "../assets/products/cauliflower.png";
+import chinese_cabbage from "../assets/products/chinese_cabbage.png";
+import corn from "../assets/products/corn.png";
+import cucumber from "../assets/products/cucumber.png";
+import eggplant from "../assets/products/eggplant.png";
+import green_capsicum from "../assets/products/green_capsicum.png";
+import green_chilly from "../assets/products/green_chilly.png";
+import lettuce from "../assets/products/lettuce.png";
+import mango from "../assets/products/mango.png";
+import okra from "../assets/products/okra.png";
+import potato from "../assets/products/potato.png";
+import red_capsicum from "../assets/products/red_capsicum.png";
+import tomato from "../assets/products/tomato.png";
 
 const products = [
   {
-    description: "200g cheese block",
-    id: 1,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/cheese.png",
-    name: "Cheese",
-    price: 10,
-    stockStatus: 1,
-    price_id: "price_1HuavSGuhXEITAut56IgndJf",
-    isWishlist: false,
-    category: "dairy",
-  },
-  {
-    description: "200ml milk bottle",
-    id: 2,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/milk.png",
-    name: "Milk",
-    price: 5,
-    stockStatus: 1,
-    price_id: "price_1HxVriGuhXEITAutt5KUKo2V",
-    isWishlist: false,
-    category: "dairy",
-  },
-  {
-    description: "1 piece of tomato",
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
-    name: "Tomato",
-    price: 2.75,
-    stockStatus: 1,
-    price_id: "price_1HxW4YGuhXEITAutgcWugXH7",
+    description: "250g green capsicum",
+    id: 10,
+    image: green_capsicum,
+    name: "Green Capsicum",
+    price: 60,
+    stockStatus: 256,
+    price_id: "price_1HxW59GuhXEITAutCwoYZoOJcap",
     isWishlist: false,
     category: "vegetables",
+    discount: 30,
   },
   {
-    description: "500g pineapple",
-    id: 4,
-    image:
-      "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/pineapple.png",
-    name: "Pineapple",
-    price: 3.25,
-    stockStatus: 1,
-    price_id: "price_1HxW59GuhXEITAutCwoYZoOJ",
+    description: "500g chinese cabbage",
+    id: 6,
+    image: chinese_cabbage,
+    name: "Chinese Cabbage",
+    price: 30,
+    stockStatus: 256,
+    price_id: "price_1HxW59GuhXEITAutCwoYZoOJcc",
+    isWishlist: false,
+    category: "vegetables",
+    discount: 0,
+  },
+  {
+    description: "1kg red mango",
+    id: 13,
+    image: mango,
+    name: "Red Mango",
+    price: 250,
+    stockStatus: 256,
+    price_id: "price_1HxW59GuhXEITAutCwoYZoOJmango",
     isWishlist: false,
     category: "fruits",
+    discount: 20,
+  },
+  {
+    description: "250g green apple",
+    id: 19,
+    image: apple,
+    name: "Green Apple",
+    price: 100,
+    stockStatus: 256,
+    price_id: "price_1HxW59GuhXEITAutCwoYZoOJkash",
+    isWishlist: false,
+    category: "fruits",
+    discount: 10,
   },
 ];
 
@@ -156,11 +156,9 @@ function Landing() {
           </Link>
         </div>
         <div className="flex justify-between items-center">
-        {products.map((product) => {
-          return (
-            <Product key={product.id} details={product}></Product>
-          );
-        })}
+          {products.map((product) => {
+            return <Product key={product.id} details={product}></Product>;
+          })}
         </div>
       </section>
 
