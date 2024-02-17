@@ -32,7 +32,7 @@ const Login = (props) => {
     e.preventDefault();
     try {
       dispatch(loginStart());
-      const url = `${VITE_API_URL}/login`;
+      const url = `${VITE_API_URL}/user/login`;
       const res = await fetch(url, {
         method: "POST",
         headers: {
