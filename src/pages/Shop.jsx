@@ -36,9 +36,9 @@ export default function Shop() {
   const [products, setProducts] = useState([]);
   const [clear, setClear] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState("");
-  const [selectedRating, setSelectedRating] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
+  // const [selectedPrice, setSelectedPrice] = useState("");
+  // const [selectedRating, setSelectedRating] = useState("");
+  // const [selectedSort, setSelectedSort] = useState("");
 
   useEffect(() => {
     setProducts([...masterProductList]);
@@ -55,11 +55,17 @@ export default function Shop() {
     setProducts([...filteredProducts]);
   }, [selectedCategory]);
 
-  useEffect(()=>{
-    if(selectedCategory || selectedPrice || selectedRating || selectedSort ){
-      setClear(false);
-    }
-  },[selectedCategory])
+  // useEffect(()=>{
+  //   if(selectedCategory || selectedPrice || selectedRating || selectedSort ){
+  //     setClear(false);
+  //   }
+  //   else{
+  //     setClear(true)
+  //     setSelectedCategory("")
+  //   }
+  // },[selectedCategory])
+
+
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -86,7 +92,7 @@ export default function Shop() {
       </div>
 
       {/* PAGINATION */}
-      <div className="flex items-center justify-center gap-2 mb-2">
+      {/* <div className="flex items-center justify-center gap-2 mb-2">
         <Button
           variant="text"
           className="flex items-center gap-2 rounded-full"
@@ -110,7 +116,7 @@ export default function Shop() {
         >
           <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
         </Button>
-      </div>
+      </div> */}
     </>
   );
 }

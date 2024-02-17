@@ -11,9 +11,9 @@ import Cart from "../pages/Cart.jsx";
 import Wishlist from "../pages/Wishlist.jsx";
 import Checkout from "../pages/Checkout.jsx";
 import ProductDetail from "../pages/ProductDetail.jsx";
+import Success from "../pages/Success.jsx";
 
 export default function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false)
   const isLoggedIn = sessionStorage.getItem("token");
 
   useEffect(() => {}, [isLoggedIn]);
@@ -33,6 +33,7 @@ export default function App() {
                 <Route path="cart" element={<Cart />} />
                 <Route path="wishlist" element={<Wishlist />} />
                 <Route path="checkout" element={<Checkout />} />
+                <Route path="success" element={<Success />} />
               </>
             ) : null}
             <Route path="*" element={<NotFound />} />

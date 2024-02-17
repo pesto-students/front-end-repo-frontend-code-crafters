@@ -15,6 +15,7 @@ export function PriceFilter(props) {
         //   priceChangeHandler(e?.props.value);
         //   return `₹${e?.props.value[0][0]} - ₹${e?.props.value[0][1]}`;
         // }}
+        disabled={true}
       >
         <Option value={"0,50"} className="text-black">
           ₹0 - ₹50

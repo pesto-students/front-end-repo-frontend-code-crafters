@@ -89,9 +89,10 @@ export default function Navbar() {
               <input
                 type="search"
                 id="default-search"
-                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-green-500 rounded-lg bg-white"
+                className="block w-full p-4 ps-10 text-sm bg-gray-300 text-gray-900 border border-green-500 rounded-lg"
                 placeholder="Fruits, vegetables..."
                 required
+                disabled={true}
               />
               {/* <Button
                   type="submit"

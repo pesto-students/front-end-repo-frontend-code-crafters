@@ -7,7 +7,7 @@ import socialMedia from "../assets/landing/social-media.png"
 
 const PageFooter = () => {
   return (
-    <footer className="bg-gray-900 text-gray-400">
+    <footer className="bg-gray-900 text-gray-400 mt-5">
       <section className="flex justify-between px-28 py-20">
         <div className="max-w-32">
           <LogoText
