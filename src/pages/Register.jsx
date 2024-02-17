@@ -33,7 +33,7 @@ const Register = () => {
       const token = await res.json();
       localStorage.setItem("token", token.data);
       dispatch(loginSuccess(token));
-      navigate("/home");
+      window.location.href = '/shop';
     } catch (error) {
       if (
         error.response &&

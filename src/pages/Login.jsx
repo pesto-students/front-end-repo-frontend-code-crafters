@@ -42,8 +42,10 @@ const Login = (props) => {
         body: JSON.stringify(data),
       });
       const token = await res.json();
+      // await alert(token)
       sessionStorage.setItem("token", token.data);
-      dispatch(loginSuccess(token)).then(() => navigate("/shop"));
+      dispatch(loginSuccess(token))
+      window.location.href = '/shop';
     } catch (error) {
       if (
         error.response &&
