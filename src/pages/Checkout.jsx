@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
-import apple from "../assets/products/apple.png";
+import logo from "../assets/logo/logo-color.svg";
 import Button from "../components/Button";
 import axios from "axios";
 import {
@@ -10,6 +10,9 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
+const VITE_CLIENT_URL = import.meta.env.VITE_CLIENT_URL;
+const KEY_ID = import.meta.env.VITE_KEY_ID;
+
 
 const states = [
   { value: "IN-AN", label: "Andaman and Nicobar Islands" },
@@ -54,45 +57,61 @@ const states = [
 export default function Checkout() {
   const cart = useSelector((state) => state.cart.cart);
   const navigate = useNavigate();
-
   const totalPrice = useSelector(cartValueSelector);
 
-    const initPayment = (data) => {
-      const options = {
-        key: import.meta.env.RAZORPAY_KEY_ID,
-        amount: totalPrice,
-        currency: "INR",
-        // name: book.name,
-        description: "Test Transaction",
-        // image: book.img,
-        order_id: data.id,
-        handler: async (response) => {
-          try {
-            const verifyUrl = `${VITE_API_URL}/payment/verify`;
-            const { data } = await axios.post(verifyUrl, response);
-            console.log("Verify",data);
-          } catch (error) {
-            console.log(error);
-          }
-        },
-        theme: {
-          color: "#0962AE",
-        },
-      };
-      const rzp = new window.Razorpay(options);
-      rzp.open();
-    };
+  const [info, setInfo] = useState({
+    fname: "",
+    lname: "",
+    phoneNumber: "",
+  });
 
-    const handlePayment = async () => {
-      try {
-        const orderUrl = `${VITE_API_URL}/payment/order`;
-        const { data } = await axios.post(orderUrl, { amount: totalPrice });
-        initPayment(data.data);
-      } catch (error) {
-        console.log(error);
-      }
+  const handleChange = ({ currentTarget: input }) => {
+    setInfo({ ...info, [input.name]: input.value });
+  };
+
+  const initPayment = (data) => {
+    const options = {
+      key: KEY_ID,
+      amount: data.amount,
+      currency: "INR",
+      name: "Harvestly",
+      description: "Test Transaction",
+      image: logo,
+      order_id: data.id,
+      callback_url: `${VITE_CLIENT_URL}/success`,
+      redirect: true,
+      prefill: {
+        name: `${info.fname} ${info.lname}`,
+        contact: info.phoneNumber,
+      },
+      handler: async (response) => {
+        try {
+          const verifyUrl = `${VITE_API_URL}/api/payment/verify`;
+          const { data } = await axios.post(verifyUrl, response);
+          console.log("Verify", data);
+          // navigate("/success")
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      theme: {
+        color: "#0962AE",
+      },
     };
-  // };
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  const handlePayment = async () => {
+    try {
+      const orderUrl = `${VITE_API_URL}/api/payment/order`;
+      const { data } = await axios.post(orderUrl, { amount: totalPrice });
+      console.log(data);
+      initPayment(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {cart.length > 0 ? (
@@ -120,8 +139,8 @@ export default function Checkout() {
                     name="fname"
                     type="text"
                     autoComplete="name"
-                    //   onChange={handleChange}
-                    placeholder="Your First Name"
+                    onChange={handleChange}
+                    placeholder="First Name"
                     required
                     className="block w-full rounded-lg border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
                   />
@@ -138,8 +157,8 @@ export default function Checkout() {
                     name="lname"
                     type="text"
                     autoComplete="name"
-                    //   onChange={handleChange}
-                    placeholder="Your Last Name"
+                    onChange={handleChange}
+                    placeholder="Last Name"
                     required
                     className="block w-full rounded-lg border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
                   />
@@ -250,8 +269,9 @@ export default function Checkout() {
                     name="phoneNumber"
                     type="number"
                     autoComplete="tel"
-                    //   onChange={handleChange}
+                    onChange={handleChange}
                     placeholder="Phone Number"
+                    pattern="[0-9]{10}"
                     required
                     maxLength="10"
                     className="block w-full rounded-lg border-0 px-2 py-1.5 bg-white text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-secondary sm:text-sm sm:leading-6"
@@ -344,15 +364,15 @@ export default function Checkout() {
                   />
                   <span className="ml-2 text-xs">UPI</span>
                 </label> */}
-                {/* <Link to="/success" className="pb-4 pt-2"> */}
-                  <Button
-                    className=" text-white font-sm bg-primary text-xs py-2 px-3 mb-2 rounded-full text-center"
-                    onClick={handlePayment}
-                    type="submit"
-                  >
-                    Place Order
-                  </Button>
-                {/* </Link> */}
+              {/* <Link to="/success" className="pb-4 pt-2"> */}
+              <Button
+                className=" text-white font-sm bg-primary text-xs py-2 px-3 mb-2 rounded-full text-center"
+                onClick={handlePayment}
+                type="submit"
+              >
+                Place Order
+              </Button>
+              {/* </Link> */}
               {/* </div> */}
             </div>
           </div>

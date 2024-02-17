@@ -46,7 +46,7 @@ const initialState = {
     {
       description: "1kg tomato",
       id: 3,
-      image: tomato,
+      image: "https://res.cloudinary.com/dbfn5lnvx/image/upload/q_auto/v1607769454/react-tutorial/products/final/tomato.png",
       name: "Tomato",
       price: 20,
       stockStatus: 256,
